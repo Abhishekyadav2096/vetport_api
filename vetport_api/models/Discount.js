@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const discount = new Schema(
   {
-    distitle: {
+    title: {
       type: String,
       trim: true,
     },
-    distype: {
+    type: {
       type: String,
       trim: true,
     },
@@ -21,7 +21,7 @@ const discount = new Schema(
     coupon_type: {
       type: Array,
     },
-    disvalue: {
+    value: {
       type: String,
       trim: true,
     },

@@ -14,9 +14,47 @@ exports.create = async (req, res) => {
   }
 };
 
+// getemail
+
+exports.getEmail = async (req, res) => {
+  try {
+    let doc = await Clientregistration.find(
+      { email: { $eq: req.params.email } },
+      { email: 1 }
+    );
+
+    if (doc.length != 0) {
+      res.status(200).json({ message: "email already exist" });
+    } else {
+      res.status(200).json({ message: "email already does not exist" });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// getphone
+
+exports.getPhone = async (req, res) => {
+  try {
+    let doc = await Clientregistration.find({
+      "phonetypes.pnumber": { $eq: req.params.phone },
+    });
+
+    if (doc.length != 0) {
+      res.status(200).json({ message: "phone number already exist" });
+    } else {
+      res.status(200).json({ message: "phone number already does not exist" });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 // Retrieve all Client from the database.
 
 exports.getPatient = async (req, res) => {
+  console.log(req.params);
   try {
     const { _id } = req.params;
     //const docs = await Clientregistration.aggregate(pipeline)
