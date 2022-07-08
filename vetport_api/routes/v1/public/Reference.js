@@ -3,8 +3,8 @@ const router = express.Router();
 
 const reference = require("../../../controllers/Reference");
 
-router.post("/save_reference", reference.create);
-router.get("/get_reference", reference.findAll);
-router.put("/update_reference", reference.update);
+router.post("/save_referredby", reference.create);
+router.get("/get_referredby", reference.findAll);
+router.put("/update_referredby", reference.update);
 
 module.exports = router;
