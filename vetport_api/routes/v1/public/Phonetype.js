@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const phonetype = require("../../../controllers/Phonetype")
+const phonetype = require("../../../controllers/Phonetype");
 
-router.post("/add", phonetype.create);
-router.get("/get", phonetype.findAll);
+router.post("/save_phonetype", phonetype.create);
+router.get("/get_phonetype", phonetype.findAll);
 
 module.exports = router;

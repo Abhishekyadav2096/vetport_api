@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const reference = require("../../../controllers/Reference")
+const reference = require("../../../controllers/Reference");
 
-router.post("/add", reference.create);
-router.get("/get", reference.findAll);
-router.put("/update", reference.update);
+router.post("/save_reference", reference.create);
+router.get("/get_reference", reference.findAll);
+router.put("/update_reference", reference.update);
 
-module.exports = router
+module.exports = router;

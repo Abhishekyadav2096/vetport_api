@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const reference = new Schema(
+const state = new Schema(
   {
     title: {
       type: String,
@@ -9,10 +9,8 @@ const reference = new Schema(
       trim: true,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
-const ReferenceModel = mongoose.model("reference", reference);
-module.exports = ReferenceModel;
+const StateModel = mongoose.model("state", state);
+module.exports = StateModel;

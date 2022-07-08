@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-router.use("/", require("./public/Clientregistration"));
-router.use("/", require("./public/Patientregistration"));
+router.use("/client", require("./public/Clientregistration"));
+router.use("/patient", require("./public/Patientregistration"));
 router.use("/soapnote", require("./public/Soapnote"));
 router.use("/complaint", require("./public/Complaint"));
 router.use("/vital", require("./public/Vital"));
@@ -31,4 +31,5 @@ router.use("/caregiver", require("./public/Caregiver"));
 router.use("/vendoritem", require("./public/Vendoritem"));
 router.use("/stockbasket", require("./public/Stockbasket"));
 router.use("/relationship", require("./public/Relationship"));
+router.use("/state", require("./public/State"));
 module.exports = router;

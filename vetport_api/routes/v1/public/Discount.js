@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const discount = require("../../../controllers/Discount")
+const discount = require("../../../controllers/Discount");
 
-router.post("/add", discount.create);
-router.get("/get", discount.findAll)
-router.put("/update", discount.update)
+router.post("/save_discount", discount.create);
+router.get("/get_discount", discount.findAll);
+router.put("/update_discount", discount.update);
 
 module.exports = router;
