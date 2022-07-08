@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV || "LOCAL";
 const LOCAL = {
   server: {
     environment: "LOCAL",
-    port: 4000,
+    port: 5000,
   },
   db: {
     uri: process.env.DB_URI,
@@ -11,7 +11,7 @@ const LOCAL = {
 };
 
 const config = {
-        LOCAL
-    }
+  LOCAL,
+};
 
-module.exports = config[env];   
+module.exports = config[env];
