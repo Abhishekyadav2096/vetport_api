@@ -22,9 +22,19 @@ exports.findAll = async (req, res) => {
   }
 };
 
+// filter provider by name
+
 exports.filterProviderByName = async (req, res) => {
   try {
-    let docs = await Staff.find({}, { _id: 1, firstName: 1, lastName: 1 });
+    docs = await Staff.aggregate([
+      {
+        $project: {
+          title: {
+            $concat: ["$firstName", " ", "$lastName"],
+          },
+        },
+      },
+    ]);
 
     res.json(docs);
   } catch (error) {

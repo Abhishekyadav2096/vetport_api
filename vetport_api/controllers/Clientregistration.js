@@ -14,37 +14,33 @@ exports.create = async (req, res) => {
   }
 };
 
-// getemail
+// verify client email
 
-exports.getEmail = async (req, res) => {
+exports.verifyClientEmail = async (req, res) => {
   try {
     let doc = await Clientregistration.find(
-      { email: { $eq: req.params.email } },
+      { email: { $eq: req.query.email } },
       { email: 1 }
     );
 
     if (doc.length != 0) {
       res.status(200).json({ message: "email already exist" });
-    } else {
-      res.status(200).json({ message: "email already does not exist" });
     }
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
-// getphone
+// verify client pnumber
 
-exports.getPhone = async (req, res) => {
+exports.verifyClientPnumber = async (req, res) => {
   try {
     let doc = await Clientregistration.find({
-      "phonetypes.pnumber": { $eq: req.params.phone },
+      "phonetypes.pnumber": { $eq: req.query.phone },
     });
 
     if (doc.length != 0) {
       res.status(200).json({ message: "phone number already exist" });
-    } else {
-      res.status(200).json({ message: "phone number already does not exist" });
     }
   } catch (error) {
     res.status(500).json(error);
