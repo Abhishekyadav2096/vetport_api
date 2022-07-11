@@ -6,5 +6,6 @@ const discount = require("../../../controllers/Discount");
 router.post("/save_discount", discount.create);
 router.get("/get_discount", discount.findAll);
 router.put("/update_discount", discount.update);
+router.get("/get_discountbyname", discount.getDiscountByName);
 
 module.exports = router;
