@@ -1,68 +1,73 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const clinic = new Schema ({
-     Clinicname : {
-         type : String
-     },
-     Clinictype : {
-         type : String
-     },
-     Adr1 : {
-        type : String
-     },
-     Adr2 : {
-        type : String
-     },
-     Country : {
-        type : String
-     },
-     State : {
-        type : String
-     },
-     City : {
-        type : String 
-     },
-     PCode : {
-        type : String
-     },
-    Clinic_Email : {
-        type : String
-    },
-    Email_Copy : {
-        type : String
-    },
-    Replyto : {
-        type : String
-    },
-    Clinic_Emailgd : {
-        type : String
-    },
-    Clinic_Emailad : {
-        type : String
-    },
-    TimeZone : {
-        type : String
-    },
-    StartTime : {
-        type : String
-    },
-    EndTime : {
-        type : String
-    },
-    Phone : {
-        type : String
-    },
-    website : {
-        type : String
-    },
-    Pricing : {
-        type : String
-    },
-    status : {
-        type : Boolean
-    }
-})
+const clinic = new Schema({
+  clinic_name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  clinic_type: {
+    type: [String],
+  },
+  address1: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  address2: {
+    type: String,
+    trim: true,
+  },
+  country: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  state: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  city: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  postalCode: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    trim: true,
+  },
+  emails: {
+    type: Array,
+    default: [],
+  },
+
+  timezone: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  startTime: {
+    type: String,
+  },
+  endTime: {
+    type: String,
+  },
+  phonetypes: {
+    type: Array,
+    default: [],
+  },
+  status: {
+    type: Boolean,
+    default: true,
+  },
+});
 
 const ClinicModel = mongoose.model("clinic", clinic);
-module.exports = ClinicModel
+module.exports = ClinicModel;

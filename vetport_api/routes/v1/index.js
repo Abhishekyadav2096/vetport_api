@@ -32,4 +32,6 @@ router.use("/vendoritem", require("./public/Vendoritem"));
 router.use("/stockbasket", require("./public/Stockbasket"));
 router.use("/relationship", require("./public/Relationship"));
 router.use("/state", require("./public/State"));
+router.use("/country", require("./public/Country"));
+router.use("/timezone", require("./public/Timezone"));
 module.exports = router;

@@ -1,10 +1,10 @@
-const State = require("../models/State");
+const Country = require("../models/Country");
 
-// Create and Save a State
+// Create and Save a Country
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new State(body);
+    const Doc = new Country(body);
     const doc = await Doc.save();
     res.status(200).json(doc);
   } catch (error) {
@@ -12,10 +12,10 @@ exports.create = async (req, res) => {
   }
 };
 
-// Retrieve all State
+// Retrieve all Country
 exports.findAll = async (req, res) => {
   try {
-    let docs = await State.find({});
+    let docs = await Country.find({});
     res.json(docs);
   } catch (error) {
     res.status(500).json(error.message);
