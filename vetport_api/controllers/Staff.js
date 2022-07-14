@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
 // Retrieve all Staff from the database.
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Staff.find({});
+    let docs = await Staff.find({}).lean();
     res.json(docs);
   } catch (error) {
     res.status(500).json(error.message);
@@ -24,18 +24,28 @@ exports.findAll = async (req, res) => {
 
 // filter provider by name
 
+// exports.filterProviderByName = async (req, res) => {
+//   try {
+//     docs = await Staff.aggregate([
+//       {
+//         $project: {
+//           title: {
+//             $concat: ["$firstName", " ", "$lastName"],
+//           },
+//         },
+//       },
+//     ]);
+
+//     res.json(docs);
+//   } catch (error) {
+//     res.status(500).json(error.message);
+//   }
+// };
+//SomeValue.find({}).select("name-_id")
+
 exports.filterProviderByName = async (req, res) => {
   try {
-    docs = await Staff.aggregate([
-      {
-        $project: {
-          title: {
-            $concat: ["$firstName", " ", "$lastName"],
-          },
-        },
-      },
-    ]);
-
+    let docs = await Staff.find({}).select("firstName lastName -_id").lean();
     res.json(docs);
   } catch (error) {
     res.status(500).json(error.message);
@@ -50,6 +60,20 @@ exports.update = async (req, res) => {
     const body = req.body;
     let doc = await Staff.findByIdAndUpdate({ _id: id }, body);
     res.json("updated");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.getUserId = async (req, res) => {
+  try {
+    let doc = await Staff.find({ userId: { $eq: req.query.userid } });
+
+    if (doc.length != 0) {
+      res.status(200).json({ message: "userId already exist" });
+    } else {
+      res.status(200).json({ message: "userId Available" });
+    }
   } catch (error) {
     res.status(500).json(error);
   }

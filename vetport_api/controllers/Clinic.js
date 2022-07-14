@@ -28,7 +28,7 @@ exports.findByTypeAndStatus = async (req, res) => {
 // Retrieve all Clinic from the database
 exports.findAll = async (req, res) => {
   try {
-    let docs = await await await Clinic.find({});
+    let docs = await Clinic.find({});
     res.json(docs);
   } catch (error) {
     res.status(500).json(error.message);

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const staff = new Schema(
   {
     clinic: {
@@ -20,99 +19,125 @@ const staff = new Schema(
     },
     email: {
       type: String,
+      required: true,
+      trim: true,
     },
     emailgd: {
       type: String,
+      trim: true,
     },
     emailad: {
       type: String,
+      trim: true,
     },
-    dob: {
+    date_dob: {
       type: Date,
     },
-    profilephoto: {
+    profilePhoto: {
       type: String,
+      trim: true,
     },
-    add1: {
+    address1: {
       type: String,
+      trim: true,
+      required: true,
     },
-    add2: {
+    address2: {
       type: String,
+      trim: true,
     },
     state: {
       type: String,
+      trim: true,
+      required: true,
     },
     city: {
       type: String,
+      trim: true,
+      required: true,
     },
-    pscode: {
+    postalCode: {
       type: String,
+      trim: true,
+      required: true,
     },
-    personalphone: {
-      type: String,
+    personalPhone: {
+      type: Array,
+      default: [],
     },
     alternatePhone: {
-      type: String,
+      type: Array,
+      default: [],
     },
     userId: {
       type: String,
+      required: true,
+      trim: true,
     },
-    usergroup: {
+    userGroup: {
       type: String,
+      required: true,
+      trim: true,
     },
-    staffdesignation: {
+    staffDesignation: {
       type: String,
+      trim: true,
     },
-    socialsecurity: {
+    socialSecurity: {
       type: String,
+      trim: true,
     },
-    driverlicense: {
+    driverLicense: {
       type: String,
+      trim: true,
     },
     license_no: {
       type: String,
+      trim: true,
     },
     healthInsu_provider: {
       type: String,
+      trim: true,
     },
     healthInsu_no: {
       type: String,
+      trim: true,
     },
     directDeposit_bank: {
       type: String,
+      trim: true,
     },
     directDeposit_accno: {
       type: String,
+      trim: true,
     },
     directDeposit_routingNo: {
       type: String,
+      trim: true,
     },
-    isuser_Provider: {
-      type: String,
-    },
-    yes: {
+    isUser_Provider: {
       type: Boolean,
     },
-    no: {
+    recWeekReport: {
       type: Boolean,
-    },
-    recweekreport: {
-      type: Boolean,
+      default: false,
     },
     signature: {
       type: String,
+      trim: true,
     },
     specialization: {
       type: String,
+      trim: true,
     },
     status: {
       type: Boolean,
+      default: true,
     },
   },
   {
     timestamps: true,
   }
 );
-
 const StaffModel = mongoose.model("staff", staff);
 module.exports = StaffModel;
