@@ -5,12 +5,10 @@ const clientregistration = new Schema(
   {
     clinic: {
       type: String,
-      required: true,
       trim: true,
     },
     title: {
       type: String,
-      required: true,
       trim: true,
     },
     firstName: {
