@@ -24,7 +24,9 @@ exports.verifyClientEmail = async (req, res) => {
     );
 
     if (doc.length != 0) {
-      res.status(200).json({ message: "email already exist" });
+      res.status(200).json({ message: "email already exist", isemail: true });
+    } else {
+      res.status(200).json({ message: "email does not exist", isemail: false });
     }
   } catch (error) {
     res.status(500).json(error);
@@ -40,7 +42,13 @@ exports.verifyClientPnumber = async (req, res) => {
     });
 
     if (doc.length != 0) {
-      res.status(200).json({ message: "phone number already exist" });
+      res
+        .status(200)
+        .json({ message: "phone number already exist", ispnumber: true });
+    } else {
+      res
+        .status(200)
+        .json({ message: "phone number already exist", ispnumber: false });
     }
   } catch (error) {
     res.status(500).json(error);
