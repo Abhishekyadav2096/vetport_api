@@ -16,43 +16,44 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
   try {
     let docs = await Staff.find({}).lean();
-    res.json(docs);
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }
 };
 
-// filter provider by name
+//filter provider by name
+
+exports.filterProviderByName = async (req, res) => {
+  try {
+    docs = await Staff.aggregate([
+      {
+        $project: {
+          title: {
+            $concat: ["$firstName", " ", "$lastName"],
+          },
+          _id: 0,
+        },
+      },
+    ]);
+
+    res.status(200).json(docs);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+// // filter provider by name
 
 // exports.filterProviderByName = async (req, res) => {
 //   try {
-//     docs = await Staff.aggregate([
-//       {
-//         $project: {
-//           title: {
-//             $concat: ["$firstName", " ", "$lastName"],
-//           },
-//         },
-//       },
-//     ]);
-
-//     res.json(docs);
+//     let docs = await Staff.find({}).select("firstName lastName -_id").lean();
+//     console.log(docs);
+//     res.json({ title: `${docs[0].firstName} ${docs[0].lastName}` });
 //   } catch (error) {
 //     res.status(500).json(error.message);
 //   }
 // };
-//SomeValue.find({}).select("name-_id")
-
-// filter provider by name
-
-exports.filterProviderByName = async (req, res) => {
-  try {
-    let docs = await Staff.find({}).select("firstName lastName -_id").lean();
-    res.json(docs);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-};
 
 // Update a Staff by the id in the request
 

@@ -36,9 +36,8 @@ const clientregistration = new Schema(
       trim: true,
     },
     state: {
-      type: String,
+      type: Object,
       required: true,
-      trim: true,
     },
     city: {
       type: String,
@@ -87,11 +86,11 @@ const clientregistration = new Schema(
       default: false,
     },
     preferredProvider: {
-      type: String,
+      type: Object,
       default: null,
     },
     referredby: {
-      type: String,
+      type: Object,
       default: null,
     },
     idCardNo: {
