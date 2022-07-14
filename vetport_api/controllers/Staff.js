@@ -43,6 +43,8 @@ exports.findAll = async (req, res) => {
 // };
 //SomeValue.find({}).select("name-_id")
 
+// filter provider by name
+
 exports.filterProviderByName = async (req, res) => {
   try {
     let docs = await Staff.find({}).select("firstName lastName -_id").lean();

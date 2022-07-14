@@ -34,4 +34,5 @@ router.use("/relationship", require("./public/Relationship"));
 router.use("/state", require("./public/State"));
 router.use("/country", require("./public/Country"));
 router.use("/timezone", require("./public/Timezone"));
+router.use("/title", require("./public/Title"));
 module.exports = router;

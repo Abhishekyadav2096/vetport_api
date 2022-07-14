@@ -3,6 +3,16 @@ const Schema = mongoose.Schema;
 
 const clientregistration = new Schema(
   {
+    clinic: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     firstName: {
       type: String,
       required: true,

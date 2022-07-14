@@ -1,10 +1,10 @@
-const Timezone = require("../models/Timezone");
+const Title = require("../models/Title");
 
-// Create and Save a Timezone
+// Create and Save a Title
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Timezone(body);
+    const Doc = new Title(body);
     const doc = await Doc.save();
     res.status(200).json(doc);
   } catch (error) {
@@ -12,11 +12,11 @@ exports.create = async (req, res) => {
   }
 };
 
-// Retrieve all Timezone
+// Retrieve all Title
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Timezone.find({}).lean();
-    res.json(docs);
+    let docs = await Title.find({}).lean();
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }
