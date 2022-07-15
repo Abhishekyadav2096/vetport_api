@@ -13,6 +13,14 @@ const phonetype = new Schema(
       required: true,
       trim: true,
     },
+    sms: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

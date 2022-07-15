@@ -25,8 +25,8 @@ exports.findAll = async (req, res) => {
 // Find a single clinic by id
 exports.findOne = async (req, res) => {
   try {
-    const { id } = req.query;
-    let doc = await Clinic.findById({ _id: id });
+    const { clinicId } = req.query;
+    let doc = await Clinic.findById({ _id: clinicId });
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -36,9 +36,9 @@ exports.findOne = async (req, res) => {
 // update a clinic by id
 exports.update = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { clinicId } = req.query;
     const body = req.body;
-    let doc = await Clinic.findByIdAndUpdate({ _id: id }, body);
+    let doc = await Clinic.findByIdAndUpdate({ _id: clinicId }, body);
     res.json("updated");
   } catch (error) {
     res.status(500).json(error);

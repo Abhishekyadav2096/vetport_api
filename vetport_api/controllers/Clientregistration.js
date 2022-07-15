@@ -117,8 +117,8 @@ exports.getPatient = async (req, res) => {
 
 exports.findOne = async (req, res) => {
   try {
-    const { id } = req.query;
-    let doc = await Clientregistration.findById({ _id: id });
+    const { clientId } = req.query;
+    let doc = await Clientregistration.findById({ _id: clientId });
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
