@@ -12,19 +12,6 @@ exports.create = async (req, res) => {
   }
 };
 
-// Retrieve Clinic by type and status
-exports.findByTypeAndStatus = async (req, res) => {
-  try {
-    let doc = await Clinic.find({
-      clinic_type: { $elemMatch: { $eq: req.query.type } },
-      status: { $eq: req.query.status },
-    });
-    res.status(200).json(doc);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
 // Retrieve all Clinic from the database
 exports.findAll = async (req, res) => {
   try {
@@ -55,5 +42,36 @@ exports.update = async (req, res) => {
     res.json("updated");
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+
+// Retrieve Clinic by type and status
+exports.findByTypeAndStatus = async (req, res) => {
+  try {
+    let doc = await Clinic.find({
+      clinic_type: { $elemMatch: { $eq: req.query.type } },
+      status: { $eq: req.query.status },
+    });
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+//Retrieve Clinic by name
+
+exports.filterByClinicName = async (req, res) => {
+  try {
+    docs = await Clinic.aggregate([
+      {
+        $project: {
+          title: "$clinic_name",
+        },
+      },
+    ]);
+
+    res.status(200).json(docs);
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };

@@ -135,6 +135,10 @@ const clientregistration = new Schema(
       type: Array,
       default: [],
     },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

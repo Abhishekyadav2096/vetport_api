@@ -24,24 +24,23 @@ exports.findAll = async (req, res) => {
 
 //filter provider by name
 
-exports.filterProviderByName = async (req, res) => {
-  try {
-    docs = await Staff.aggregate([
-      {
-        $project: {
-          title: {
-            $concat: ["$firstName", " ", "$lastName"],
-          },
-          _id: 0,
-        },
-      },
-    ]);
+// exports.filterProviderByName = async (req, res) => {
+//   try {
+//     docs = await Staff.aggregate([
+//       {
+//         $project: {
+//           title: {
+//             $concat: ["$firstName", " ", "$lastName"],
+//           },
+//         },
+//       },
+//     ]);
 
-    res.status(200).json(docs);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-};
+//     res.status(200).json(docs);
+//   } catch (error) {
+//     res.status(500).json(error.message);
+//   }
+// };
 
 // // filter provider by name
 
@@ -54,6 +53,31 @@ exports.filterProviderByName = async (req, res) => {
 //     res.status(500).json(error.message);
 //   }
 // };
+
+// filter provider by name
+
+exports.filterProviderByName = async (req, res) => {
+  try {
+    docs = await Staff.aggregate([
+      {
+        $match: {
+          is_Provider: true,
+        },
+      },
+      {
+        $project: {
+          title: {
+            $concat: ["$firstName", " ", "$lastName"],
+          },
+        },
+      },
+    ]);
+
+    res.status(200).json(docs);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
 
 // Update a Staff by the id in the request
 

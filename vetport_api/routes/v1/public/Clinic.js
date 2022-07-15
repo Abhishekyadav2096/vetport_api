@@ -8,5 +8,6 @@ router.get("/get", clinic.findAll);
 router.get("/get1", clinic.findOne);
 router.put("/update", clinic.update);
 router.get("/getByClinicType", clinic.findByTypeAndStatus);
+router.get("/getByClinicName", clinic.filterByClinicName);
 
 module.exports = router;

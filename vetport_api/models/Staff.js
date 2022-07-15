@@ -115,8 +115,9 @@ const staff = new Schema(
       type: String,
       trim: true,
     },
-    isUser_Provider: {
+    is_Provider: {
       type: Boolean,
+      default: false,
     },
     recWeekReport: {
       type: Boolean,
@@ -130,6 +131,7 @@ const staff = new Schema(
       type: String,
       trim: true,
     },
+
     status: {
       type: Boolean,
       default: true,
