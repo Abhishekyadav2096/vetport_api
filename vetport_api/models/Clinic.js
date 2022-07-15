@@ -6,6 +6,7 @@ const clinic = new Schema({
     type: String,
     required: true,
     trim: true,
+    unique: true,
   },
   clinic_type: {
     type: [String],
