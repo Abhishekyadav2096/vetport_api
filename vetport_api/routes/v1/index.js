@@ -36,4 +36,6 @@ router.use("/country", require("./public/Country"));
 router.use("/timezone", require("./public/Timezone"));
 router.use("/title", require("./public/Title"));
 router.use("/appointment", require("./public/Appointment"));
+router.use("/staffdesignation", require("./public/Staffdesignation"));
+router.use("/specialization", require("./public/Specialization"));
 module.exports = router;

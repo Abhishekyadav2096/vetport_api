@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 const staff = new Schema(
   {
     clinic: {
-      type: String,
+      type: Object,
       required: true,
-      trim: true,
+      default: null,
     },
     firstName: {
       type: String,
@@ -47,9 +47,9 @@ const staff = new Schema(
       trim: true,
     },
     state: {
-      type: String,
-      trim: true,
+      type: Object,
       required: true,
+      default: null,
     },
     city: {
       type: String,
@@ -62,12 +62,12 @@ const staff = new Schema(
       required: true,
     },
     personalPhone: {
-      type: Array,
-      default: [],
+      type: Object,
+      default: null,
     },
     alternatePhone: {
-      type: Array,
-      default: [],
+      type: Object,
+      default: null,
     },
     userId: {
       type: String,
@@ -75,13 +75,12 @@ const staff = new Schema(
       trim: true,
     },
     userGroup: {
-      type: String,
-      required: true,
-      trim: true,
+      type: Object,
+      default: null,
     },
     staffDesignation: {
-      type: String,
-      trim: true,
+      type: Object,
+      default: null,
     },
     socialSecurity: {
       type: String,
@@ -128,8 +127,8 @@ const staff = new Schema(
       trim: true,
     },
     specialization: {
-      type: String,
-      trim: true,
+      type: Object,
+      default: null,
     },
 
     status: {

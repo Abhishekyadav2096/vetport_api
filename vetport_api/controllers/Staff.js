@@ -83,9 +83,9 @@ exports.filterProviderByName = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { staffId } = req.query;
     const body = req.body;
-    let doc = await Staff.findByIdAndUpdate({ _id: id }, body);
+    let doc = await Staff.findByIdAndUpdate(staffId, body);
     res.json("updated");
   } catch (error) {
     res.status(500).json(error);
