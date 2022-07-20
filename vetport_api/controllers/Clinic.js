@@ -15,8 +15,8 @@ exports.create = async (req, res) => {
 // Retrieve all Clinic from the database
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Clinic.find({});
-    res.json(docs);
+    let docs = await Clinic.find({}).lean();
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }

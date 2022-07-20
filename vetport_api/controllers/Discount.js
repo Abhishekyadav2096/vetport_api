@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Discount.find({});
+    let docs = await Discount.find({}).lean();
     res.json(docs);
   } catch (error) {
     res.status(500).json(error.message);
@@ -47,7 +47,7 @@ exports.update = async (req, res) => {
     const { id } = req.query;
     const body = req.body;
     let doc = await Discount.findByIdAndUpdate({ _id: id }, body);
-    res.json("updated");
+    res.status(200).json("updated");
   } catch (error) {
     res.status(500).json(error);
   }

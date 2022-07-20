@@ -38,4 +38,5 @@ router.use("/title", require("./public/Title"));
 router.use("/appointment", require("./public/Appointment"));
 router.use("/staffdesignation", require("./public/Staffdesignation"));
 router.use("/specialization", require("./public/Specialization"));
+router.use("/user", require("./public/User"));
 module.exports = router;

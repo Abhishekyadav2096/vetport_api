@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const patientregistration = require("../../../controllers/Patientregistration")
+const patientregistration = require("../../../controllers/Patientregistration");
 
-router.post("/addpatient", patientregistration.create);
+router.post("/save_patient", patientregistration.create);
 //router.get("/getpatient", patientregistration.findAll);
-router.get("/get1patient", patientregistration.findOne);
-router.put("/update1", patientregistration.update)
-
+router.get("/get_patient", patientregistration.findOne);
+router.put("/update_patient", patientregistration.update);
 
 module.exports = router;

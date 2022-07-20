@@ -1,6 +1,7 @@
 const Clientregistration = require("../models/Clientregistration");
 const Patientregistration = require("../models/Patientregistration");
 const ObjectId = require("mongoose").Types.ObjectId;
+
 // Create and Save a new Client
 
 exports.create = async (req, res) => {
@@ -70,7 +71,7 @@ exports.getPatient = async (req, res) => {
       },
       {
         $lookup: {
-          from: "patientregistrSations",
+          from: "patientregistrations",
 
           as: "patient_info",
           let: {

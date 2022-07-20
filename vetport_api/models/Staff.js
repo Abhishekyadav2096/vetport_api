@@ -69,15 +69,6 @@ const staff = new Schema(
       type: Object,
       default: null,
     },
-    userId: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    userGroup: {
-      type: Object,
-      default: null,
-    },
     staffDesignation: {
       type: Object,
       default: null,

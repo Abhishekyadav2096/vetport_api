@@ -15,8 +15,8 @@ exports.create = async (req, res) => {
 // Retrieve all Relationship
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Relationship.find({});
-    res.json(docs);
+    let docs = await Relationship.find({}).lean();
+    res.status(200).josn(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }

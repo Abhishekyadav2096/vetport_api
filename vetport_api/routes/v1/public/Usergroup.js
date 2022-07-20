@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const usergroup = require("../../../controllers/Usergroup")
+const usergroup = require("../../../controllers/Usergroup");
 
-router.post("/add", usergroup.create);
-router.get("/get", usergroup.findAll);
-router.put("/update", usergroup.update)
+router.post("/save_usergroup", usergroup.create);
+router.get("/get_usergroup", usergroup.findAll);
+router.put("/update_usergruop", usergroup.update);
 
-module.exports = router
+module.exports = router;

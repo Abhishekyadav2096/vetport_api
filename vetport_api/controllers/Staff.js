@@ -1,11 +1,14 @@
 const Staff = require("../models/Staff");
-
+const User = require("../models/User");
 // Create and Save a Staff
 exports.create = async (req, res) => {
   try {
     const body = req.body;
+    const { userId, userGroup } = req.body;
     const Doc = new Staff(body);
     const doc = await Doc.save();
+    // saving user credentials
+    const doc2 = await User.create({ userId, userGroup });
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -87,20 +90,6 @@ exports.update = async (req, res) => {
     const body = req.body;
     let doc = await Staff.findByIdAndUpdate(staffId, body);
     res.json("updated");
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
-
-exports.getUserId = async (req, res) => {
-  try {
-    let doc = await Staff.find({ userId: { $eq: req.query.userid } });
-
-    if (doc.length != 0) {
-      res.status(200).json({ message: "userId already exist" });
-    } else {
-      res.status(200).json({ message: "userId Available" });
-    }
   } catch (error) {
     res.status(500).json(error);
   }
