@@ -25,6 +25,18 @@ exports.findAll = async (req, res) => {
   }
 };
 
+// Find a single Staff with an id
+
+exports.findOne = async (req, res) => {
+  try {
+    const { staffId } = req.query;
+    let doc = await Staff.findById({ _id: staffId });
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 //filter provider by name
 
 // exports.filterProviderByName = async (req, res) => {
