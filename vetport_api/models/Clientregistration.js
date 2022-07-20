@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const clientregistration = new Schema(
   {
-    clinic: {
-      type: String,
+    clinicName: {
+      type: Object,
       trim: true,
+      default: null,
     },
     title: {
-      type: String,
+      type: Object,
       trim: true,
+      default: null,
     },
     firstName: {
       type: String,
@@ -21,21 +22,15 @@ const clientregistration = new Schema(
       required: true,
       trim: true,
     },
-    date_dob: {
-      type: Date,
-    },
     address1: {
       type: String,
       required: true,
       trim: true,
     },
-    address2: {
-      type: String,
-      trim: true,
-    },
     state: {
       type: Object,
       required: true,
+      default: null,
     },
     city: {
       type: String,
@@ -47,92 +42,9 @@ const clientregistration = new Schema(
       required: true,
       trim: true,
     },
-    email: {
-      type: String,
-      trim: true,
-    },
-    declineEmail: {
-      type: Boolean,
-      default: false,
-    },
-    announcements: {
-      type: Boolean,
-      default: true,
-    },
-    reminders: {
-      type: Boolean,
-      default: true,
-    },
-    statements: {
-      type: Boolean,
-      default: true,
-    },
-    copyEmail: {
-      type: String,
-      trim: true,
-    },
-    emails: {
-      type: Array,
-      default: [],
-    },
     phonetypes: {
       type: Array,
-      default: [],
-    },
-    declineTextMessages: {
-      type: Boolean,
-      default: false,
-    },
-    preferredProvider: {
-      type: Object,
-      default: null,
-    },
-    referredby: {
-      type: Object,
-      default: null,
-    },
-    idCardNo: {
-      type: String,
-      trim: true,
-    },
-    alert: {
-      type: String,
-      trim: true,
-    },
-    isAccountBelongsToClinic: {
-      type: Boolean,
-      default: false,
-    },
-    isInterestApply: {
-      type: Boolean,
-      default: false,
-    },
-    isDiscountApply: {
-      type: Boolean,
-      default: false,
-    },
-    addDiscount: {
-      type: String,
-      trim: true,
-    },
-    isLoyaltyReward: {
-      type: Boolean,
-      default: false,
-    },
-    loyaltyReferrenceNo: {
-      type: String,
-      trim: true,
-    },
-    notes: {
-      type: String,
-      trim: true,
-    },
-    tags: {
-      type: Array,
-      default: [],
-    },
-    cdetails: {
-      type: Array,
+      required: true,
       default: [],
     },
     status: {
@@ -142,8 +54,8 @@ const clientregistration = new Schema(
   },
   {
     timestamps: true,
+    strict: false,
   }
 );
-
 const ClientModel = mongoose.model("clientregistration", clientregistration);
 module.exports = ClientModel;
