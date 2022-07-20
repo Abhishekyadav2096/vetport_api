@@ -49,12 +49,12 @@ exports.updatePassword = async (req, res) => {
 
 exports.getUserId = async (req, res) => {
   try {
-    let doc = await User.find({ userId: { $eq: req.query.userid } });
+    let doc = await User.find({ userId: { $eq: req.query.userId } });
 
     if (doc.length != 0) {
-      res.status(200).json({ message: "userId already exist", isuserid: true });
+      res.status(200).json({ message: "userId already exist", isuserId: true });
     } else {
-      res.status(200).json({ message: "userId Available", isuserid: false });
+      res.status(200).json({ message: "userId Available", isuserId: false });
     }
   } catch (error) {
     res.status(500).json(error);
