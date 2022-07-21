@@ -1,5 +1,6 @@
 const Breed = require("../models/Breed");
 const Species = require("../models/Species");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 // Create and Save a Breed
 exports.create = async (req, res) => {
@@ -36,18 +37,18 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.getBySpecies = async (req, res) => {
+exports.getBreedBySpeciesId = async (req, res) => {
   try {
-    const name = req.query.name;
+    const id = req.query.id;
     const docs = await Species.aggregate([
       {
-        $match: { name: name },
+        $match: { _id: ObjectId(id) },
       },
       {
         $lookup: {
           from: "breeds",
           localField: "_id",
-          foreignField: "species",
+          foreignField: "species_id",
           as: "breed-info",
         },
       },

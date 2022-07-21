@@ -1,5 +1,6 @@
 const Sex = require("../models/Sex");
 const Species = require("../models/Species");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 // Create and add a Sex of species
 exports.create = async (req, res) => {
@@ -38,16 +39,17 @@ exports.update = async (req, res) => {
 
 exports.getBySpecies = async (req, res) => {
   try {
-    const name = req.query.name;
+    const id = req.query.id;
+    console.log(id);
     const docs = await Species.aggregate([
       {
-        $match: { name: name },
+        $match: { _id: ObjectId(id) },
       },
       {
         $lookup: {
           from: "sexes",
           localField: "_id",
-          foreignField: "species",
+          foreignField: "species_id",
           as: "sex-info",
         },
       },

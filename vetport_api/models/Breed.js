@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const breed = new Schema(
   {
-    species: {
+    species_id: {
       type: Schema.Types.ObjectId,
       ref: Species.modelName,
     },

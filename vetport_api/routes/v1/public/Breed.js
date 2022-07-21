@@ -6,6 +6,6 @@ const breed = require("../../../controllers/Breed");
 router.post("/save_breed", breed.create);
 router.get("/get_breed", breed.findAll);
 router.put("/update_breed", breed.update);
-router.get("/get_by_species", breed.getBySpecies);
+router.get("/get_breed_bySpeciesId", breed.getBreedBySpeciesId);
 
 module.exports = router;

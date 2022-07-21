@@ -65,7 +65,7 @@ exports.filterByClinicName = async (req, res) => {
     docs = await Clinic.aggregate([
       {
         $project: {
-          title: "$clinic_name",
+          title: "$title",
         },
       },
     ]);

@@ -56,6 +56,10 @@ const staff = new Schema(
       type: Boolean,
       default: true,
     },
+    isProvider: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
