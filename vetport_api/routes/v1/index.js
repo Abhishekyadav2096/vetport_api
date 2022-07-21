@@ -39,4 +39,5 @@ router.use("/appointment", require("./public/Appointment"));
 router.use("/staffDesignation", require("./public/Staffdesignation"));
 router.use("/specialization", require("./public/Specialization"));
 router.use("/user", require("./public/User"));
+router.use("/patientgroupcategory", require("./public/Patientgroupcategory"));
 module.exports = router;

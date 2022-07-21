@@ -1,17 +1,22 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const species = new Schema ({
-    Name : {
-        type : String
+const species = new Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
     },
-    Description : {
-        type : String
+    status: {
+      type: Boolean,
     },
-    Status : {
-        type : Boolean
-    }
-})
+  },
+  {
+    timestamps: true,
+    strict: false,
+  }
+);
 
-const SpeciesModel = mongoose.model("species",species)
-module.exports = SpeciesModel
+const SpeciesModel = mongoose.model("species", species);
+module.exports = SpeciesModel;

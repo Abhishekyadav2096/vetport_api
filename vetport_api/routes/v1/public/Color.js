@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const color = require("../../../controllers/Color")
+const color = require("../../../controllers/Color");
 
-router.post("/add", color.create);
-router.get("/get", color.findAll);
-router.put("/update", color.update);
+router.post("/save_color", color.create);
+router.get("/get_color", color.findAll);
+router.put("/update_color", color.update);
 
-module.exports = router
+module.exports = router;

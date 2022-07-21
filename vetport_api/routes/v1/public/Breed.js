@@ -1,10 +1,11 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const breed = require("../../../controllers/Breed")
+const breed = require("../../../controllers/Breed");
 
-router.post("/add", breed.create);
-router.get("/get", breed.findAll);
-router.put("/update", breed.update);
+router.post("/save_breed", breed.create);
+router.get("/get_breed", breed.findAll);
+router.put("/update_breed", breed.update);
+router.get("/get_by_species", breed.getBySpecies);
 
-module.exports = router
+module.exports = router;

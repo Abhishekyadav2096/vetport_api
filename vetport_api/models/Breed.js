@@ -1,20 +1,32 @@
 const mongoose = require("mongoose");
+const Species = require("./Species");
 const Schema = mongoose.Schema;
 
-const breed = new Schema ({
-    Species : {
-        type : String
+const breed = new Schema(
+  {
+    species: {
+      type: Schema.Types.ObjectId,
+      ref: Species.modelName,
     },
-    Breed : {
-        type : String
+    breed: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    Description : {
-       type : String
+    description: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    Status : {
-        type : Boolean
-    }
-})
+    status: {
+      type: Boolean,
+    },
+  },
+  {
+    timestamps: true,
+    strict: false,
+  }
+);
 
-const BreedModel = mongoose.model("breed",breed)
-module.exports = BreedModel
+const BreedModel = mongoose.model("breed", breed);
+module.exports = BreedModel;

@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const species = require("../../../controllers/Species")
+const species = require("../../../controllers/Species");
 
-router.post("/add", species.create);
-router.get("/get", species.findAll);
-router.put("/update", species.update);
+router.post("/save_species", species.create);
+router.get("/get_species", species.findAll);
+router.put("/update_species", species.update);
 
-module.exports = router
+module.exports = router;

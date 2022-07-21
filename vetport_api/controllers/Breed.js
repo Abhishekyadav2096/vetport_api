@@ -1,4 +1,5 @@
 const Breed = require("../models/Breed");
+const Species = require("../models/Species");
 
 // Create and Save a Breed
 exports.create = async (req, res) => {
@@ -30,6 +31,29 @@ exports.update = async (req, res) => {
     const body = req.body;
     let doc = await Breed.findByIdAndUpdate({ _id: id }, body);
     res.json("updated");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.getBySpecies = async (req, res) => {
+  try {
+    const name = req.query.name;
+    const docs = await Species.aggregate([
+      {
+        $match: { name: name },
+      },
+      {
+        $lookup: {
+          from: "breeds",
+          localField: "_id",
+          foreignField: "species",
+          as: "breed-info",
+        },
+      },
+      { $project: { "breed-info.breed": 1 } },
+    ]);
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error);
   }
