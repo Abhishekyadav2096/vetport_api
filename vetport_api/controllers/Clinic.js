@@ -76,3 +76,17 @@ exports.filterByClinicName = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
+
+exports.getClinicByDefault = async (req, res) => {
+  try {
+    let doc = await Clinic.find(
+      { default: { $eq: req.params.default } },
+
+      console.log(req.params)
+    );
+
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
