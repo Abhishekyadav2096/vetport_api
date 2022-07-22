@@ -39,7 +39,8 @@ exports.update = async (req, res) => {
     const { clinicId } = req.query;
     const body = req.body;
     let doc = await Clinic.findByIdAndUpdate({ _id: clinicId }, body);
-    res.json("updated");
+
+    res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
