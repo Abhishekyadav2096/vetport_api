@@ -84,7 +84,6 @@ exports.getClinicByDefault = async (req, res) => {
 
       console.log(req.params)
     );
-
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
