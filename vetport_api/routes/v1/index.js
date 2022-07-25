@@ -41,4 +41,6 @@ router.use("/specialization", require("./public/Specialization"));
 router.use("/user", require("./public/User"));
 router.use("/patientgroupcategory", require("./public/Patientgroupcategory"));
 router.use("/appointmenttype", require("./public/Appointmenttype"));
+router.use("/appointmentstatus", require("./public/Appointmentstatus"));
+
 module.exports = router;
