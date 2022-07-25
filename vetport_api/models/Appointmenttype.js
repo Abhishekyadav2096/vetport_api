@@ -17,6 +17,14 @@ const appointmenttype = new Schema(
       type: String,
       trim: true,
     },
+    default: {
+      type: Boolean,
+      default: false,
+    },
+    status: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true, strict: false }
 );
