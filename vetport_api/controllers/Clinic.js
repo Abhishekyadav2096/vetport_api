@@ -79,13 +79,25 @@ exports.filterByClinicName = async (req, res) => {
 
 exports.getClinicByDefault = async (req, res) => {
   try {
-    let doc = await Clinic.find(
-      { default: { $eq: req.params.default } },
-
-      console.log(req.params)
-    );
+    let doc = await Clinic.find({ default: true });
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+
+// filter refferal clinic
+exports.getRefferalClinic = async (req, res) => {
+  try {
+    const docs = await Clinic.find(
+      {
+        clinic_type: { $elemMatch: { $eq: "Refferal" } },
+      },
+      { title: 1 }
+    );
+
+    res.status(200).json(docs);
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };

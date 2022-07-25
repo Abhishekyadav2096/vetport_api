@@ -106,3 +106,24 @@ exports.update = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+// filter provide by referral clinic
+
+exports.filterReferralProvider = async (req, res) => {
+  try {
+    const clinicId = req.query.id;
+    let doc = await Staff.aggregate([
+      { $match: { "clinicName._id": clinicId, isProvider: true } },
+      {
+        $project: {
+          title: {
+            $concat: ["$firstName", " ", "$lastName"],
+          },
+        },
+      },
+    ]);
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};

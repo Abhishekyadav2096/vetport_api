@@ -9,6 +9,12 @@ const clinic = new Schema(
       trim: true,
       unique: true,
     },
+    clinic_type: {
+      type: [String],
+    },
+    location: {
+      type: [Object],
+    },
     address1: {
       type: String,
       required: true,

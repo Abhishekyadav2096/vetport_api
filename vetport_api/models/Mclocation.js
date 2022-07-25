@@ -1,29 +1,39 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const mclocation = new Schema ({
-    LocName : {
-        type : String
-    },
-    Loc_address : {
-        type : String
-    },
-    Country : {
-        type : String
-    },
-    State : {
-        type : String
-    },
-    City : {
-        type : String
-    },
-    Pscode : {
-        type : String
-    },
-    status : {
-        type : Boolean
-    }
-})
+const mclocation = new Schema({
+  location_name: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  location_address: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  country: {
+    type: Object,
+    required: true,
+  },
+  state: {
+    type: Object,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  postalCode: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  status: {
+    type: Boolean,
+  },
+});
 
-const MclocationModel = mongoose.model("mclocation",mclocation)
-module.exports = MclocationModel
+const MclocationModel = mongoose.model("mclocation", mclocation);
+module.exports = MclocationModel;

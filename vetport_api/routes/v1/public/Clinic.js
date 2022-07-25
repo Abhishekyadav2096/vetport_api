@@ -9,6 +9,7 @@ router.get("/get_clinicById", clinic.findOne);
 router.put("/update_clinicById", clinic.update);
 router.get("/get_clinicType", clinic.findByTypeAndStatus);
 router.get("/get_clinicName", clinic.filterByClinicName);
-router.get("/get_clinicByDefault/:default", clinic.getClinicByDefault);
+router.get("/get_clinicByDefault", clinic.getClinicByDefault);
+router.get("/get_refferalClinic", clinic.getRefferalClinic);
 
 module.exports = router;
