@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Plantype = require("./Plantype");
 const Planaction = require("./Planaction");
-const plantype = new Schema(
+const plancategory = new Schema(
   {
     plantype_id: {
       type: Schema.Types.ObjectId,
