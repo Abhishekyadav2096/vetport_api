@@ -57,6 +57,19 @@ exports.update = async (req, res) => {
   }
 };
 
+// Retrieve AppointmentType from the database by name.
+exports.filterByType = async (req, res) => {
+  try {
+    const type = req.query.type;
+    const docs = await Appointmenttype.find({
+      appointment_type: { $regex: type, $options: "i" },
+    }).lean();
+    res.status(200).json(docs);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 // Delete a Appointmenttype  by the id in the request
 
 exports.delete = async (req, res) => {

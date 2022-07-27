@@ -39,8 +39,12 @@ router.use("/appointment", require("./public/Appointment"));
 router.use("/staffDesignation", require("./public/Staffdesignation"));
 router.use("/specialization", require("./public/Specialization"));
 router.use("/user", require("./public/User"));
-router.use("/patientgroupcategory", require("./public/Patientgroupcategory"));
+router.use("/taginfo", require("./public/Taginfo"));
 router.use("/appointmenttype", require("./public/Appointmenttype"));
 router.use("/appointmentstatus", require("./public/Appointmentstatus"));
+router.use("/followup", require("./public/Followup"));
+router.use("/plantype", require("./public/Plantype"));
+router.use("/planAction", require("./public/Planaction"));
+router.use("/PlanCategory", require("./public/Plancategory"));
 
 module.exports = router;

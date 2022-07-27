@@ -12,5 +12,6 @@ router.patch(
 );
 router.put("/update_appointmenttype", appointmenttype.update);
 router.delete("/delete_appointmenttype", appointmenttype.delete);
+router.get("/get_appointmenttype_by_type", appointmenttype.filterByType);
 
 module.exports = router;

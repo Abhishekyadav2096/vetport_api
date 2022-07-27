@@ -1,0 +1,9 @@
+const express = require("express");
+const router = express.Router();
+
+const plancategory = require("../../../controllers/Plancategory");
+
+router.post("/save_plancategory", plancategory.create);
+router.get("/get_plancategory", plancategory.findAll);
+
+module.exports = router;
