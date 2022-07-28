@@ -38,7 +38,7 @@ exports.update = async (req, res) => {
     const id = req.query.id;
     const body = req.body;
     const doc = await PlanSubCategory.findByIdAndUpdate(id, body).lean();
-    res.status(200).json({ message: "Plan sub-category successfully updated" });
+    res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error.message);
   }
