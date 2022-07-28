@@ -31,31 +31,43 @@ exports.update = async (req, res) => {
     const { id } = req.query;
     const body = req.body;
     let doc = await Breed.findByIdAndUpdate({ _id: id }, body);
-    res.json("updated");
+    res.status(200).json("doc");
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
+// exports.getBreedBySpeciesId = async (req, res) => {
+//   try {
+//     const id = req.query.id;
+//     const docs = await Species.aggregate([
+//       {
+//         $match: { _id: ObjectId(id) },
+//       },
+//       {
+//         $lookup: {
+//           from: "breeds",
+//           localField: "_id",
+//           foreignField: "species_id",
+//           as: "breed-info",
+//         },
+//       },
+//       { $project: { "breed-info.breed": 1 } },
+//     ]);
+//     res.status(200).json(docs);
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// };
+
 exports.getBreedBySpeciesId = async (req, res) => {
   try {
     const id = req.query.id;
-    const docs = await Species.aggregate([
-      {
-        $match: { _id: ObjectId(id) },
-      },
-      {
-        $lookup: {
-          from: "breeds",
-          localField: "_id",
-          foreignField: "species_id",
-          as: "breed-info",
-        },
-      },
-      { $project: { "breed-info.breed": 1 } },
-    ]);
-    res.status(200).json(docs);
-  } catch (error) {
-    res.status(500).json(error);
+    const docs = await Breed.find({ species_id: id }, { breed: 1 }).lean();
+    res.status(200).json({ status: "Success", data: docs });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ status: "Internal Server Error", message: err.message });
   }
 };

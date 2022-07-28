@@ -30,7 +30,7 @@ exports.update = async (req, res) => {
     const { id } = req.query;
     const body = req.body;
     let doc = await Color.findByIdAndUpdate({ _id: id }, body);
-    res.json("updated");
+    res.status(200).json("doc");
   } catch (error) {
     res.status(500).json(error);
   }
@@ -59,3 +59,54 @@ exports.getColorBySpeciesId = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+
+//  Retrieve color by species Id 
+
+// exports.getColorBySpeciesId = async (req, res) => {
+//   try {
+//     const id = req.query.id;
+//     const docs = await Color.find({ species_id: id }, { color: 1 }).lean();
+//     res.status(200).json({ status: "Success", data: docs });
+//   } catch (err) {
+//     res
+//       .status(500)
+//       .json({ status: "Internal Server Error", message: err.message });
+//   }
+// };
+
+
+
+// exports.mapColor = async (req, res) => {
+//   try {
+//     const id = req.query.id;
+//     const species_id = req.body.species_id;
+//     const doc = await Color.findByIdAndUpdate(id, {
+//       $push: { species_id: species_id },
+//     });
+//     if (!doc) {
+//       return res
+//         .status(404)
+//         .json({ status: 'Not Found', message: 'Invalid Id' });
+//     }
+//     res.status(200).json({ status: 'Success', data: doc });
+//   } catch (err) {
+//     res
+//       .status(500)
+//       .json({ status: 'Internal Server Error', message: err.message });
+//   }
+// };
+​
+
+
+// exports.delete = async (req, res) => {
+//   try {
+//     const id = req.query.id;
+//     await Color.findByIdAndDelete(id).lean();
+//     res.status(200).json({ status: 'Success', message: 'Colors Deleted' });
+//   } catch (err) {
+//     res
+//       .status(500)
+//       .json({ status: 'Internal Server Error', message: err.message });
+//   }
+// };
