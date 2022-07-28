@@ -7,7 +7,7 @@ router.post("/save_color", color.create);
 router.get("/get_color", color.findAll);
 router.put("/update_color", color.update);
 router.get("/get_color_bySpeciesId", color.getColorBySpeciesId);
-//router.patch("/map_color", color.mapColor);
-//router.delete("/delete_color", color.delete);
+router.patch("/map_color", color.mapColor);
+router.delete("/delete_color", color.delete);
 
 module.exports = router;
