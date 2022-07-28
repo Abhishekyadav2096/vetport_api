@@ -1,15 +1,19 @@
+const mongoose = require("mongoose");
 const Staff = require("../models/Staff");
 const User = require("../models/User");
+const objectId = mongoose.Types.ObjectId;
 // Create and Save a Staff
 exports.create = async (req, res) => {
   try {
     const body = req.body;
     const { userId, userGroup } = req.body;
-    const Doc = new Staff(body);
-    const doc = await Doc.save();
+    const staff_doc = await Staff.create(body);
     // saving user credentials
-    const doc2 = await User.create({ userId, userGroup });
-    res.status(200).json(doc);
+    const staff_credentials_doc = await User.create({ userId, userGroup });
+    res.status(201).json({
+      Staff: staff_doc,
+      Staff_credentials: staff_credentials_doc,
+    });
   } catch (error) {
     res.status(500).json(error);
   }
