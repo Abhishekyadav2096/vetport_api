@@ -47,5 +47,7 @@ router.use("/plantype", require("./public/Plantype"));
 router.use("/planAction", require("./public/Planaction"));
 router.use("/plancategory", require("./public/Plancategory"));
 router.use("/plansubcategory", require("./public/PlanSubCategory"));
+router.use("/pricingstrategy", require("./public/Pricingstrategy"));
+//router.use("/planitem", require("./public/Planitem"));
 
 module.exports = router;

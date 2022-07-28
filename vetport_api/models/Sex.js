@@ -7,7 +7,7 @@ const sex = new Schema({
     type: Schema.Types.ObjectId,
     ref: Species.modelName,
   },
-  sex: {
+  title: {
     type: String,
     required: true,
     trim: true,

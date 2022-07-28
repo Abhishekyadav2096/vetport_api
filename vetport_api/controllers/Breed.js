@@ -63,7 +63,7 @@ exports.update = async (req, res) => {
 exports.getBreedBySpeciesId = async (req, res) => {
   try {
     const id = req.query.id;
-    const docs = await Breed.find({ species_id: id }, { breed: 1 }).lean();
+    const docs = await Breed.find({ species_id: id }, { title: 1 }).lean();
     res.status(200).json({ status: "Success", data: docs });
   } catch (err) {
     res

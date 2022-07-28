@@ -15,12 +15,12 @@ exports.create = async (req, res) => {
   }
 };
 
-// Find a single Patient with an id
+// Find  Patient
 
-exports.findOne = async (req, res) => {
+exports.findPatient = async (req, res) => {
   try {
-    const { id } = req.query;
-    let doc = await Patientregistration.findById({ _id: id });
+    const query = req.query;
+    let doc = await Patientregistration.find(query);
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);

@@ -8,7 +8,7 @@ const breed = new Schema(
       type: Schema.Types.ObjectId,
       ref: Species.modelName,
     },
-    breed: {
+    title: {
       type: String,
       required: true,
       trim: true,

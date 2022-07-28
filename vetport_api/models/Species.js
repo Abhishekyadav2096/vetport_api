@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const species = new Schema(
   {
-    name: {
+    title: {
       type: String,
       trim: true,
       required: true,

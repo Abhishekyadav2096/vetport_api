@@ -37,26 +37,39 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.getBySpecies = async (req, res) => {
+// exports.getBySpecies = async (req, res) => {
+//   try {
+//     const id = req.query.id;
+//     console.log(id);
+//     const docs = await Species.aggregate([
+//       {
+//         $match: { _id: ObjectId(id) },
+//       },
+//       {
+//         $lookup: {
+//           from: "sexes",
+//           localField: "_id",
+//           foreignField: "species",
+//           as: "sex-info",
+//         },
+//       },
+//       { $project: { "sex-info.sex": 1 } },
+//     ]);
+//     res.status(200).json(docs);
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// };
+
+// get sex by species Id
+exports.getSexBySpecies = async (req, res) => {
   try {
     const id = req.query.id;
-    console.log(id);
-    const docs = await Species.aggregate([
-      {
-        $match: { _id: ObjectId(id) },
-      },
-      {
-        $lookup: {
-          from: "sexes",
-          localField: "_id",
-          foreignField: "species_id",
-          as: "sex-info",
-        },
-      },
-      { $project: { "sex-info.sex": 1 } },
-    ]);
-    res.status(200).json(docs);
-  } catch (error) {
-    res.status(500).json(error);
+    const docs = await Sex.find({ species_id: id }, { title: 1 }).lean();
+    res.status(200).json({ status: "Success", data: docs });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ status: "Internal Server Error", message: err.message });
   }
 };
