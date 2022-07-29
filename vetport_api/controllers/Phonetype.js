@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
   try {
     let docs = await Phonetype.find({}).lean();
-    res.status(200).josn(docs);
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }

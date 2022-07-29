@@ -134,9 +134,10 @@ exports.update = async (req, res) => {
     const body = req.body;
     let doc = await Clientregistration.findByIdAndUpdate(
       { _id: clientId },
-      body
+      body,
+      { new: true, runValidators: true }
     );
-    res.json("updated");
+    res.json(doc);
   } catch (error) {
     res.status(500).json(error);
   }

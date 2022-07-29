@@ -10,7 +10,7 @@ const planitem = new Schema(
       type: Schema.Types.ObjectId,
       ref: Pricingstrategy.modelName,
     },
-    name: {
+    title: {
       type: String,
       required: true,
       trim: true,
@@ -26,6 +26,10 @@ const planitem = new Schema(
     weight_range: {
       type: Object,
       required: true,
+    },
+    ststus: {
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true, strict: false }

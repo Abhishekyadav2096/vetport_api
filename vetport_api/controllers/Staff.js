@@ -104,8 +104,11 @@ exports.update = async (req, res) => {
   try {
     const { staffId } = req.query;
     const body = req.body;
-    let doc = await Staff.findByIdAndUpdate(staffId, body);
-    res.json("updated");
+    let doc = await Staff.findByIdAndUpdate({ _id: staffId }, body, {
+      new: true,
+      runValidators: true,
+    });
+    res.json(doc);
   } catch (error) {
     res.status(500).json(error);
   }

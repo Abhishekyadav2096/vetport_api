@@ -31,10 +31,28 @@ exports.findPatient = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { patientId } = req.query;
     const body = req.body;
-    let doc = await Patientregistration.findByIdAndUpdate({ _id: id }, body);
-    res.json("updated");
+    let doc = await Patientregistration.findByIdAndUpdate(
+      { _id: patientId },
+      body,
+      { new: true, runValidators: true }
+    );
+    res.json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// Find  Patient Name according to client Id
+exports.verifyPatientName = async (req, res) => {
+  try {
+    const query = req.query;
+    let doc = await Patientregistration.find(query);
+    if (doc.length === 0) {
+      return res.status(200).json({ patientNameExists: false });
+    }
+    res.status(200).json({ patientNameExists: true });
   } catch (error) {
     res.status(500).json(error);
   }
