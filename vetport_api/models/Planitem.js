@@ -27,7 +27,7 @@ const planitem = new Schema(
       type: Object,
       required: true,
     },
-    ststus: {
+    status: {
       type: Boolean,
       default: true,
     },
