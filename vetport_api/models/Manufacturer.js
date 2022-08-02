@@ -1,17 +1,23 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const manufacturer = new Schema ({
-    Manufacturer : {
-        type : String    
+const manufacturer = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    Website : {
-        type : String
+    status: {
+      type: Boolean,
+      default: true,
     },
-    Status : {
-        type : Boolean
-    }
-})
+  },
+  {
+    timestamps: true,
+    strict: false,
+  }
+);
 
-const ManufacturerModel = mongoose.model("manufacturer",manufacturer)
-module.exports = ManufacturerModel
+const ManufacturerModel = mongoose.model("manufacturer", manufacturer);
+module.exports = ManufacturerModel;

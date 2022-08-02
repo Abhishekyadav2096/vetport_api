@@ -1,10 +1,10 @@
-const Vendoritem = require("../models/Vendoritem");
+const Packagetype = require("../models/Packagetype");
 
-// Create and Save a Vendor item
+// Create and Save a Package type
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Vendoritem(body);
+    const Doc = new Packagetype(body);
     const doc = await Doc.save();
     res.status(201).json(doc);
   } catch (error) {
@@ -12,23 +12,23 @@ exports.create = async (req, res) => {
   }
 };
 
-// Retrieve all Vendor item from the database.
+// Retrieve all Package type from the database.
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Vendoritem.find({}).lean();
+    let docs = await Packagetype.find({});
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }
 };
 
-// Update a Vendor item by the id in the request
+// Update a Package type by the id in the request
 
 exports.update = async (req, res) => {
   try {
     const id = req.params.id;
     const body = req.body;
-    const doc = await Vendoritem.findByIdAndUpdate(id, body, {
+    const doc = await Packagetype.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
@@ -38,11 +38,11 @@ exports.update = async (req, res) => {
   }
 };
 
-// Retrieve vendor from the database by name.
+// Retrieve package type from the database by name.
 exports.findByName = async (req, res) => {
   try {
     const name = req.params.name === undefined ? "" : req.params.name;
-    const doc = await Vendoritem.find({
+    const doc = await Packagetype.find({
       title: { $regex: name, $options: "i" },
     }).lean();
     res.status(200).json(doc);

@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const visitreason = require("../../../controllers/Visitreason")
+const visitreason = require("../../../controllers/Visitreason");
 
-router.post("/add", visitreason.create);
-router.get("/get", visitreason.findAll);
-router.put("/update", visitreason.update)
+router.post("/save_visitReason", visitreason.create);
+router.get("/get_visitReason", visitreason.findAll);
+router.put("/update_visitReason", visitreason.update);
 
-module.exports = router
+module.exports = router;

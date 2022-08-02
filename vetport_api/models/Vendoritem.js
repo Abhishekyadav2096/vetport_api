@@ -1,75 +1,69 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Manufacturer = require("./Manufacturer");
+const Packagetype = require("./Packagetype");
+const Contenttype = require("./Contenttype");
+const Vendor = require("./Vendor");
+const Stockfacility = require("./Stockfacility");
+const Schema = mongoose.Schema;
 
-const vendoritem = new Schema ({
-    Vendor : {
-        type : String,
-        required : true    
-    },
-    Vendor_item : {
-        type : String,
-        required : true
-    },
-    Vendor_item_nu : {
-        type : String
-    },
-    Manufacturer : {
-        type : String,
-        required : true
-    },
-    Manufacturer_item_code : {
-        type : String
-    },
-    UPC_code : {
-        type : String
-    },
-    Din : {
-        type : String
-    },
-    HSN_code : {
-        type : String
-    },
-    Vendor_package : {
-        type : String,
-        required : true
-    },
-    Clinic_selling_unit : {
-        type : String,
-        required : true
-    },
-    Clinic_selling_unit_per_vendor_package : {
-        type : String,
-        required : true
-    },
-    Purchase_price_per_package : {
-        type : Number,
-        required : true
-    },
-    Minimum_threshold_quantity : {
-        type : Number,
-        required : true
-    },
-    package_to_re_order : {
-        type : Number,
-        required : true
-    },
-    Is_manufacturer_required : {
-        type : Boolean
-    },
-    Vetcove : {
-        type : Boolean,
-        required : true
-    },
-    Tracking : {
-        type : Array
-    },
-    Copy_vendor_item_to_other_facilities : {
-        type : Array
-    },
-    Status : {
-        type : Boolean
-    }
-})
+const vendoritem = new Schema({
+  vendor: {
+    type: Schema.Types.ObjectId,
+    ref: Vendor.modelName,
+  },
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  manufacturer: {
+    type: Schema.Types.ObjectId,
+    ref: Manufacturer.modelName,
+  },
+  packageType: {
+    type: Schema.Types.ObjectId,
+    ref: Packagetype.modelName,
+    required: true,
+  },
+  contentType: {
+    type: Schema.Types.ObjectId,
+    ref: Contenttype.modelName,
+    required: true,
+  },
+  packageSize: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+    trim: true,
+  },
+  threshold: {
+    type: Number,
+    required: true,
+    trim: true,
+  },
+  reOrder: {
+    type: Number,
+    required: true,
+  },
+  vetcove: {
+    type: Boolean,
+    required: true,
+    default: true,
+  },
+  stockFacilities: {
+    type: Schema.Types.ObjectId,
+    ref: Stockfacility.modelName,
+    required: true,
+  },
+  status: {
+    type: Boolean,
+    default: true,
+  },
+});
 
-const VendoritemModel = mongoose.model("vendoritem",vendoritem)
-module.exports = VendoritemModel
+const VendoritemModel = mongoose.model("vendoritem", vendoritem);
+module.exports = VendoritemModel;
