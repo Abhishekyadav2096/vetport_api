@@ -3,11 +3,19 @@ const router = express.Router();
 
 const staff = require("../../../controllers/Staff");
 
-router.post("/save_staff", staff.create);
-router.get("/get_staff", staff.findAll);
-router.get("/get_staffById", staff.findOne);
-router.put("/update_staff", staff.update);
-router.get("/get_preferredProvider", staff.filterProviderByName);
-router.get("/get_referralProvider", staff.filterReferralProvider);
+// router.post("/save_staff", staff.create);
+// router.get("/get_staff/:id?", staff.find);
+
+// // router.get("/get_staffById", staff.findOne);
+
+// router.put("/update_staff/:id", staff.update);
+// router.get("/get_preferredProvider", staff.filterProviderByName);
+// router.get("/get_referralProvider/:clinicId", staff.filterReferralProvider);
+
+router.post("/", staff.create);
+router.get("/preferredprovider", staff.filterProviderByName);
+router.get("/referralprovider/:clinicId", staff.filterReferralProvider);
+router.get("/:id?", staff.find);
+router.put("/:id", staff.update);
 
 module.exports = router;

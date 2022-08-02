@@ -4,9 +4,8 @@ const Title = require("../models/Title");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Title(body);
-    const doc = await Doc.save();
-    res.status(200).json(doc);
+    const doc = await Title.create(body);
+    res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -15,7 +14,7 @@ exports.create = async (req, res) => {
 // Retrieve all Title
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Title.find({}).lean();
+    const docs = await Title.find({}).lean();
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);

@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.use("/", require("./public/Clientregistration"));
 router.use("/", require("./public/Patientregistration"));
-router.use("/", require("./public/Staff"));
+router.use("/staff", require("./public/Staff"));
 router.use("/encounter", require("./public/Encounter"));
 router.use("/soapnote", require("./public/Soapnote"));
 router.use("/complaint", require("./public/Complaint"));
@@ -46,10 +46,10 @@ router.use("/followup", require("./public/Followup"));
 router.use("/plantype", require("./public/Plantype"));
 router.use("/planAction", require("./public/Planaction"));
 router.use("/plancategory", require("./public/Plancategory"));
-router.use("/plansubcategory", require("./public/PlanSubCategory"));
+router.use("/plansubcategory", require("./public/Plansubcategory"));
 router.use("/pricingstrategy", require("./public/Pricingstrategy"));
 router.use("/planitem", require("./public/Planitem"));
-router.use("/groupPlanItem", require("./public/groupPlanItem"));
+router.use("/groupplanitem", require("./public/groupPlanItem"));
 router.use("/reminder", require("./public/Reminder"));
 
 module.exports = router;

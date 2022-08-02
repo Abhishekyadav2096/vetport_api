@@ -17,10 +17,9 @@ exports.find = async (req, res) => {
   try {
     const query = req.params._id === undefined ? {} : req.params;
     const doc = await Reminder.find(query).lean();
-    console.log(doc);
 
     if (doc.length === 0) {
-      res.status(404).json({ message: "Invalid Id" });
+      return res.status(404).json({ message: "Invalid Id" });
     }
     res.status(200).json(doc);
   } catch (err) {
@@ -32,6 +31,7 @@ exports.find = async (req, res) => {
 exports.findByTitle = async (req, res) => {
   try {
     const title = req.query.title;
+    console.log(title);
     const doc = await Reminder.find({
       title: { $regex: title, $options: "i" },
     }).lean();
@@ -57,7 +57,7 @@ exports.findByQuery = async (req, res) => {
 //Update the Reminder by id
 exports.update = async (req, res) => {
   try {
-    const id = req.params._id;
+    const id = req.params.id;
     const body = req.body;
     const doc = await Reminder.findByIdAndUpdate(id, body, {
       new: true,

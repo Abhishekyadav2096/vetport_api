@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Staff = require("./Staff");
+const UserGroup = require("./Usergroup");
 
-const userId = new Schema(
+const user = new Schema(
   {
     userId: {
       type: String,
@@ -10,9 +11,8 @@ const userId = new Schema(
       trim: true,
     },
     userGroup: {
-      type: String,
-      trim: true,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: UserGroup.modelName,
     },
     homePage: {
       type: String,
@@ -32,5 +32,5 @@ const userId = new Schema(
   }
 );
 
-const UserIdModel = mongoose.model("userId", userId);
-module.exports = UserIdModel;
+const UserModel = mongoose.model("user", user);
+module.exports = UserModel;

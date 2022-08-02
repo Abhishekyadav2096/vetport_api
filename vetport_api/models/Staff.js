@@ -1,11 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+const Clinic = require("./Clinic");
+const State = require("./State");
+const StaffDesignation = require("./Staffdesignation");
+const Specialization = require("./Specialization");
+
 const staff = new Schema(
   {
-    clinicName: {
-      type: Object,
+    clinic: {
+      type: Schema.Types.ObjectId,
+      ref: Clinic.modelName,
       required: true,
-      default: null,
     },
     firstName: {
       type: String,
@@ -28,9 +34,9 @@ const staff = new Schema(
       required: true,
     },
     state: {
-      type: Object,
+      type: Schema.Types.ObjectId,
+      ref: State.modelName,
       required: true,
-      default: null,
     },
     city: {
       type: String,
@@ -42,15 +48,23 @@ const staff = new Schema(
       trim: true,
       required: true,
     },
-    personal_ptype: {
-      type: Object,
-      default: null,
+    personalPhone: {
+      type: [Object],
       required: true,
     },
-    personal_pnumber: {
-      type: String,
-      required: true,
-      trim: true,
+    // personal_ptype: {
+    //   type: Object,
+    //   default: null,
+    //   required: true,
+    // },
+    // personal_pnumber: {
+    //   type: String,
+    //   required: true,
+    //   trim: true,
+    // },
+    staffDesignation: {
+      type: Schema.Types.ObjectId,
+      ref: StaffDesignation.modelName,
     },
     status: {
       type: Boolean,
@@ -60,11 +74,16 @@ const staff = new Schema(
       type: Boolean,
       default: false,
     },
+    specialization: {
+      type: Schema.Types.ObjectId,
+      ref: Specialization.modelName,
+    },
   },
   {
     timestamps: true,
     strict: false,
   }
 );
+
 const StaffModel = mongoose.model("staff", staff);
 module.exports = StaffModel;

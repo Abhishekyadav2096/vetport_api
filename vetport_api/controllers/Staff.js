@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 const Staff = require("../models/Staff");
 const User = require("../models/User");
-const objectId = mongoose.Types.ObjectId;
+
 // Create and Save a Staff
 exports.create = async (req, res) => {
   try {
-    const body = req.body;
-    const { userId, userGroup } = req.body;
+    const { userId, userGroup, ...body } = req.body;
     const staff_doc = await Staff.create(body);
     // saving user credentials
     const staff_credentials_doc = await User.create({ userId, userGroup });
@@ -20,26 +19,30 @@ exports.create = async (req, res) => {
 };
 
 // Retrieve all Staff from the database.
-exports.findAll = async (req, res) => {
+exports.find = async (req, res) => {
   try {
-    let docs = await Staff.find({}).lean();
+    const query = req.params.id === undefined ? {} : req.params;
+    const docs = await Staff.find(query).lean();
+    if (docs.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(docs);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json(error);
   }
 };
 
 // Find a single Staff with an id
 
-exports.findOne = async (req, res) => {
-  try {
-    const { staffId } = req.query;
-    let doc = await Staff.findById({ _id: staffId });
-    res.status(200).json(doc);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-};
+// exports.findOne = async (req, res) => {
+//   try {
+//     const { staffId } = req.query;
+//     let doc = await Staff.findById({ _id: staffId });
+//     res.status(200).json(doc);
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// };
 
 //filter provider by name
 
@@ -77,10 +80,10 @@ exports.findOne = async (req, res) => {
 
 exports.filterProviderByName = async (req, res) => {
   try {
-    docs = await Staff.aggregate([
+    const docs = await Staff.aggregate([
       {
         $match: {
-          is_Provider: true,
+          isProvider: true,
         },
       },
       {
@@ -102,13 +105,16 @@ exports.filterProviderByName = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { staffId } = req.query;
+    const id = req.params.id;
     const body = req.body;
-    let doc = await Staff.findByIdAndUpdate({ _id: staffId }, body, {
+    const doc = await Staff.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
-    res.json(doc);
+    if (doc.length === 0) {
+      res.status(404).json({ message: "Invalid Id" });
+    }
+    res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -118,9 +124,9 @@ exports.update = async (req, res) => {
 
 exports.filterReferralProvider = async (req, res) => {
   try {
-    const clinicId = req.query.id;
-    let doc = await Staff.aggregate([
-      { $match: { "clinicName._id": clinicId, isProvider: true } },
+    const clinicId = req.params.clinicId;
+    const doc = await Staff.aggregate([
+      { $match: { clinic: clinicId, isProvider: true } },
       {
         $project: {
           title: {

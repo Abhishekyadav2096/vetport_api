@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Plancategory = require("./Plancategory");
 const Pricingstrategy = require("./Pricingstrategy");
-const PlanSubCategory = require("./PlanSubCategory");
+const PlanSubCategory = require("./Plansubcategory");
 
 const planitem = new Schema(
   {
-    pricingstrategy_id: {
+    pricingStrategyId: {
       type: Schema.Types.ObjectId,
       ref: Pricingstrategy.modelName,
     },
@@ -23,7 +23,7 @@ const planitem = new Schema(
       type: Schema.Types.ObjectId,
       ref: PlanSubCategory.modelName,
     },
-    weight_range: {
+    weightRange: {
       type: Object,
       required: true,
     },
