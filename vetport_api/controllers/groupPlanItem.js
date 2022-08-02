@@ -4,42 +4,62 @@ const GroupPlanItem = require("../models/groupPlanItem");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new GroupPlanItem(body);
-    const doc = await Doc.save();
-    res.status(200).json(doc);
+    const doc = await GroupPlanItem.create(body);
+    res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
-// Retrieve all GroupPlanItem
+// Retrieve all GroupPlanItems
 exports.findAll = async (req, res) => {
   try {
-    let docs = await GroupPlanItem.find({}).lean();
+    const docs = await GroupPlanItem.find({}).lean();
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }
 };
 
-// Find a single GroupPlanitem with an id
-
-exports.findOne = async (req, res) => {
+// Retrieve GroupPlanItem by id
+exports.findById = async (req, res) => {
   try {
-    const { planitemId } = req.query;
-    let doc = await GroupPlanItem.findById({ _id: planitemId });
+    const id = req.params.id;
+    const doc = await GroupPlanItem.findById(id)
+      .populate({
+        path: "groupPlanItem",
+        select: "planItem",
+        populate: {
+          path: "planItem",
+          populate: { path: "planItemId", select: "title" },
+        },
+      })
+      .populate({
+        path: "planItem",
+        populate: { path: "planItemId", select: "title" },
+      })
+      .lean();
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json(error.message);
   }
 };
 
-// Update GroupPlanitem by query parameter
+// Update GroupPlanitem by id
 exports.update = async (req, res) => {
   try {
-    const id = req.query.id;
+    const id = req.params.id;
     const body = req.body;
-    const doc = await GroupPlanItem.findByIdAndUpdate(id, body).lean();
+    const doc = await GroupPlanItem.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    }).lean();
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error.message);
@@ -47,12 +67,26 @@ exports.update = async (req, res) => {
 };
 
 // Retrieve GroupPlanitem from the database by name.
-exports.filterGroupPlanItemByName = async (req, res) => {
+exports.filterByName = async (req, res) => {
   try {
-    const name = req.query.name;
-    const docs = await GroupPlanItem.find({
-      title: { $regex: name, $options: "i" },
-    }).lean();
+    const name = req.params.name;
+    const docs = await GroupPlanItem.find(
+      {
+        title: { $regex: name, $options: "i" },
+      },
+      { title: 1 }
+    ).lean();
+    res.status(200).json(docs);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+// Retrieve GroupPlanitem from the database by query
+exports.filterByQuery = async (req, res) => {
+  try {
+    const query = req.query;
+    const docs = await GroupPlanItem.find(query).lean();
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);

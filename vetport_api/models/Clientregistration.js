@@ -1,16 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+const Clinic = require("./Clinic");
+const Title = require("./Title");
+const State = require("./State");
+const Staff = require("./Staff");
+
 const clientregistration = new Schema(
   {
-    clinicName: {
-      type: Object,
-      trim: true,
-      default: null,
+    clinic: {
+      type: Schema.Types.ObjectId,
+      ref: Clinic.modelName,
     },
     title: {
-      type: Object,
-      trim: true,
-      default: null,
+      type: Schema.Types.ObjectId,
+      ref: Title.modelName,
     },
     firstName: {
       type: String,
@@ -28,9 +32,9 @@ const clientregistration = new Schema(
       trim: true,
     },
     state: {
-      type: Object,
+      type: Schema.Types.ObjectId,
+      ref: State.modelName,
       required: true,
-      default: null,
     },
     city: {
       type: String,
@@ -42,10 +46,13 @@ const clientregistration = new Schema(
       required: true,
       trim: true,
     },
-    phonetypes: {
-      type: Array,
+    phoneNumber: {
+      type: [Object],
       required: true,
-      default: [],
+    },
+    preferredProvider: {
+      type: Schema.Types.ObjectId,
+      ref: Staff.modelName,
     },
     status: {
       type: Boolean,
@@ -57,5 +64,6 @@ const clientregistration = new Schema(
     strict: false,
   }
 );
+
 const ClientModel = mongoose.model("clientregistration", clientregistration);
 module.exports = ClientModel;

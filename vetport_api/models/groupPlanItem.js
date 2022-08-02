@@ -1,17 +1,43 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const Planitem = require("./Planitem");
 
-const group_plan_item = new Schema(
+const Clinic = require("./Clinic");
+const Planitem = require("./Planitem");
+const Species = require("./Species");
+
+const planItemInfo = new Schema(
   {
+    planItemId: {
+      type: Schema.Types.ObjectId,
+      ref: Planitem.modelName,
+      required: true,
+    },
+  },
+  { strict: false }
+);
+
+const groupPlanItem = new Schema(
+  {
+    clinic: {
+      type: Schema.Types.ObjectId,
+      ref: Clinic.modelName,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
       trim: true,
     },
-    planItemId: {
+    planItem: [planItemInfo],
+    groupPlanItem: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "groupPlanItem",
+      },
+    ],
+    species: {
       type: Schema.Types.ObjectId,
-      ref: Planitem.modelName,
+      ref: Species.modelName,
     },
     status: {
       type: Boolean,
@@ -21,5 +47,5 @@ const group_plan_item = new Schema(
   { timestamps: true, strict: false }
 );
 
-const groupPlanItemModel = mongoose.model("group_plan_item", group_plan_item);
+const groupPlanItemModel = mongoose.model("groupPlanItem", groupPlanItem);
 module.exports = groupPlanItemModel;

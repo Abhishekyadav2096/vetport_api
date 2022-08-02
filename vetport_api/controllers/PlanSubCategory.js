@@ -1,4 +1,4 @@
-const PlanSubCategory = require("../models/PlanSubCategory");
+const PlanSubCategory = require("../models/Plansubcategory");
 
 // Create and Save a Plan sub-category
 exports.create = async (req, res) => {

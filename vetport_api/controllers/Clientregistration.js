@@ -3,26 +3,22 @@ const Patientregistration = require("../models/Patientregistration");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 // Create and Save a new Client
-
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Clientregistration(body);
-    const doc = await Doc.save();
-    res.status(200).json(doc);
+    const doc = await Clientregistration.create(body);
+    res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
 // verify client email
-
 exports.verifyClientEmail = async (req, res) => {
   try {
-    let doc = await Clientregistration.find(
-      { email: { $eq: req.query.email } },
-      { email: 1 }
-    );
+    const doc = await Clientregistration.find({
+      email: { $eq: req.params.email },
+    });
 
     if (doc.length != 0) {
       res.status(200).json({ message: "email already exist", isemail: true });
@@ -35,11 +31,10 @@ exports.verifyClientEmail = async (req, res) => {
 };
 
 // verify client pnumber
-
 exports.verifyClientPnumber = async (req, res) => {
   try {
-    let doc = await Clientregistration.find({
-      "phonetypes.pnumber": { $eq: req.query.phone },
+    const doc = await Clientregistration.find({
+      "phoneNumber.pnumber": { $eq: req.params.pnumber },
     });
 
     if (doc.length != 0) {
@@ -57,7 +52,6 @@ exports.verifyClientPnumber = async (req, res) => {
 };
 
 // Retrieve all Client from the database.
-
 exports.getPatient = async (req, res) => {
   console.log(req.params);
   try {
@@ -115,11 +109,13 @@ exports.getPatient = async (req, res) => {
 };
 
 // Find a single Client with an id
-
 exports.findOne = async (req, res) => {
   try {
-    const { clientId } = req.query;
-    let doc = await Clientregistration.findById({ _id: clientId });
+    const id = req.params.id;
+    const doc = await Clientregistration.findById(id).lean();
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -127,17 +123,18 @@ exports.findOne = async (req, res) => {
 };
 
 // Update a Client by the id in the request
-
 exports.update = async (req, res) => {
   try {
-    const { clientId } = req.query;
+    const id = req.params.id;
     const body = req.body;
-    let doc = await Clientregistration.findByIdAndUpdate(
-      { _id: clientId },
-      body,
-      { new: true, runValidators: true }
-    );
-    res.json(doc);
+    const doc = await Clientregistration.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
+    res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }

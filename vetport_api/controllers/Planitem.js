@@ -47,14 +47,53 @@ exports.update = async (req, res) => {
 };
 
 // Retrieve planitem from the database by name.
-exports.filterPlanItemByName = async (req, res) => {
+exports.findByName = async (req, res) => {
   try {
     const name = req.query.name;
-    const docs = await Planitem.find({
+    const doc = await Planitem.find({
       title: { $regex: name, $options: "i" },
     }).lean();
-    res.status(200).json(docs);
+    res.status(200).json(doc);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json(error);
+  }
+};
+
+// Find planitems with an query
+exports.findByQuery = async (req, res) => {
+  try {
+    const query = {};
+    for (var key in req.params) {
+      if (req.params[key] !== undefined) {
+        query[key] = req.params[key];
+      }
+    }
+    const doc = await Planitem.find(query).lean();
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// Find planitems with planaction
+exports.findByPlanaction = (req, res) => {
+  try {
+    const query = req.query.id;
+    console.log(query);
+    Planitem.find({})
+      .populate({
+        path: "planCategory_id planSubCategory_id",
+        select: "planaction_id",
+      })
+      .exec((err, result) => {
+        const test = result.filter(
+          (item) =>
+            item.planCategory_id.planaction_id == query ||
+            item.planSubCategory_id.planaction_id == query
+        );
+        res.status(200).json(test);
+      });
+  } catch (error) {
+    res.status(500).json(error);
   }
 };
