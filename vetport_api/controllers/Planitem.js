@@ -49,7 +49,7 @@ exports.update = async (req, res) => {
 // Retrieve planitem from the database by name.
 exports.findByName = async (req, res) => {
   try {
-    const name = req.query.name;
+    const name = req.params.name === undefined ? "" : req.params.name;
     const doc = await Planitem.find({
       title: { $regex: name, $options: "i" },
     }).lean();

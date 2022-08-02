@@ -3,13 +3,13 @@ const router = express.Router();
 
 router.use("/", require("./public/Clientregistration"));
 router.use("/", require("./public/Patientregistration"));
-router.use("/staff", require("./public/Staff"));
+router.use("/", require("./public/Staff"));
 router.use("/encounter", require("./public/Encounter"));
 router.use("/soapnote", require("./public/Soapnote"));
 router.use("/complaint", require("./public/Complaint"));
 router.use("/vital", require("./public/Vital"));
 router.use("/clinic", require("./public/Clinic"));
-router.use("/mobilecliniclocation", require("./public/Mclocatin"));
+router.use("/mobilecliniclocation", require("./public/Mclocation"));
 router.use("/phonetype", require("./public/Phonetype"));
 router.use("/discount", require("./public/Discount"));
 router.use("/userGroup", require("./public/Usergroup"));

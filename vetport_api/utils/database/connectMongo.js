@@ -5,7 +5,7 @@ const { db } = config;
 const connectDB = async () => {
   try {
     //db.uri
-     mongoose.connect(db.uri, {
+    await mongoose.connect(db.uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       //useCreateIndex: true,
@@ -14,7 +14,7 @@ const connectDB = async () => {
     console.log(`MongoDB Connected`);
   } catch (error) {
     console.log("database connection failed. exiting now...");
-    console.error(error);
+    throw new Error(error.message);
     //process.exit(1);
   }
 };
