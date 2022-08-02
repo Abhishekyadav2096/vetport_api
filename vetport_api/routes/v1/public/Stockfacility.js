@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const stockfacility = require("../../../controllers/Stockfacility")
+const stockfacility = require("../../../controllers/Stockfacility");
 
-router.post("/add", stockfacility.create);
-router.get("/get", stockfacility.findAll);
-router.put("/update", stockfacility.update);
+router.post("/save_stock_facility", stockfacility.create);
+router.get("/get_stock_facility", stockfacility.findAll);
+router.put("/update_stock_facility/:id", stockfacility.update);
 
-module.exports = router
+module.exports = router;

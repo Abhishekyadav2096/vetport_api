@@ -1,58 +1,57 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Country = require("./Country");
+const State = require("./State");
+const Vendortype = require("./Vendortype");
+const Schema = mongoose.Schema;
 
-const vendor = new Schema ({
-    Vendor : {
-        type : String,
-        required : true    
+const vendor = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    Vendor_type : {
-        type : String,
-        required : true,
+    vendorType: {
+      type: Schema.Types.ObjectId,
+      ref: Vendortype.modelName,
     },
-    Phone_type : {
-        type : String,
-        required : true
+    phoneNumber: {
+      type: [Object],
+      required: true,
     },
-    Fax : {
-        type : Number
+    country: {
+      type: Schema.Types.ObjectId,
+      ref: Country.modelName,
     },
-    Email : {
-        type : String,
+    email: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    state: {
+      type: Schema.Types.ObjectId,
+      ref: State.modelName,
+    },
+    city: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    postalCode: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    status: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  {
+    timestamps: true,
+    strict: false,
+  }
+);
 
-    },
-    Address : {
-        type : String,
-        required : true
-    },
-    Country : {
-        type : String,
-        required : true
-    },
-    State : {
-        type : String
-    },
-    City : {
-        type : String,
-        required : true
-    },
-    Postal_code : {
-        type : String,
-        required : true
-    },
-    Website : {
-        type : String
-    },
-    Account_number : {
-        type : String
-    },
-    Note : {
-        type : String
-    },
-    Status : {
-        type : Boolean
-    }
-})
-
-const VendorModel = mongoose.model("vendor",vendor)
-module.exports = VendorModel
+const VendorModel = mongoose.model("vendor", vendor);
+module.exports = VendorModel;

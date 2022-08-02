@@ -1,10 +1,10 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const manufacturer = require("../../../controllers/Manufacturer")
+const manufacturer = require("../../../controllers/Manufacturer");
 
-router.post("/add", manufacturer.create);
-router.get("/get", manufacturer.findAll);
-router.put("/update", manufacturer.update);
+router.post("/save_manufacturer", manufacturer.create);
+router.get("/get_manufacturer", manufacturer.findAll);
+router.put("/update_manufacturer/:id", manufacturer.update);
 
-module.exports = router
+module.exports = router;

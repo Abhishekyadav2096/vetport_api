@@ -51,5 +51,7 @@ router.use("/pricingstrategy", require("./public/Pricingstrategy"));
 router.use("/planitem", require("./public/Planitem"));
 router.use("/groupplanitem", require("./public/groupPlanItem"));
 router.use("/reminder", require("./public/Reminder"));
+router.use("/packageType", require("./public/Packagetype"));
+router.use("/contentType", require("./public/ContentType"));
 
 module.exports = router;

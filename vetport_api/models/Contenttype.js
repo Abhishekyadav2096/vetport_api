@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const visitreason = new Schema(
+const contenttype = new Schema(
   {
     title: {
       type: String,
@@ -10,7 +10,6 @@ const visitreason = new Schema(
     },
     status: {
       type: Boolean,
-      default: true,
     },
   },
   {
@@ -19,5 +18,5 @@ const visitreason = new Schema(
   }
 );
 
-const VisitreasonModel = mongoose.model("visitreason", visitreason);
-module.exports = VisitreasonModel;
+const ContenttypeModel = mongoose.model("contenttype", contenttype);
+module.exports = ContenttypeModel;

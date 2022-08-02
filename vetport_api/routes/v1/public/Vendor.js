@@ -1,11 +1,12 @@
-const express = require("express")
+const express = require("express");
 const router = express.Router();
 
-const vendor = require("../../../controllers/Vendor")
+const vendor = require("../../../controllers/Vendor");
 
-router.post("/add", vendor.create);
-router.get("/get", vendor.findAll);
-router.put("/update", vendor.update);
+router.post("/save_vendor", vendor.create);
+router.get("/get_vendor", vendor.findAll);
+router.put("/update_vendor/:id", vendor.update);
+router.get("/get_vendorByName/:name?", vendor.findByName);
 //router.get("/searchvendor", vendor.findAll)
 
-module.exports = router
+module.exports = router;
