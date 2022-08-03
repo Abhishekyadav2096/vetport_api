@@ -4,9 +4,8 @@ const Clinic = require("../models/Clinic");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Clinic(body);
-    const doc = await Doc.save();
-    res.status(200).json(doc);
+    const doc = await Clinic.create(body);
+    res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -15,7 +14,7 @@ exports.create = async (req, res) => {
 // Retrieve all Clinic from the database
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Clinic.find({}).lean();
+    const docs = await Clinic.find({}).lean();
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
@@ -25,8 +24,11 @@ exports.findAll = async (req, res) => {
 // Find a single clinic by id
 exports.findOne = async (req, res) => {
   try {
-    const { clinicId } = req.query;
-    let doc = await Clinic.findById({ _id: clinicId });
+    const id = req.params.id;
+    const doc = await Clinic.findById(id).lean();
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -36,10 +38,15 @@ exports.findOne = async (req, res) => {
 // update a clinic by id
 exports.update = async (req, res) => {
   try {
-    const { clinicId } = req.query;
+    const id = req.params.id;
     const body = req.body;
-    let doc = await Clinic.findByIdAndUpdate({ _id: clinicId }, body);
-
+    const doc = await Clinic.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -79,7 +86,7 @@ exports.filterByClinicName = async (req, res) => {
 
 exports.getClinicByDefault = async (req, res) => {
   try {
-    let doc = await Clinic.find({ default: true });
+    const doc = await Clinic.find({ default: true });
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);

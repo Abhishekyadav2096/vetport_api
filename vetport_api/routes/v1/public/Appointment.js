@@ -5,5 +5,8 @@ const appointment = require("../../../controllers/Appointment");
 
 router.post("/save_appointment", appointment.create);
 router.get("/get_appointment", appointment.findAll);
+router.get("/get_appointmentByDate/:from/:to", appointment.findByDate);
+// router.get("/get_appointmentByWeek/:from/:to", appointment.findByWeek);
+// router.get("/get_appointmentByMonth/:year/:month", appointment.findByMonth);
 
 module.exports = router;

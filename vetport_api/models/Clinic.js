@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const Country = require("./Country");
+const State = require("./State");
+const Timezone = require("./Timezone");
+const McLocation = require("./Mclocation");
+
 const clinic = new Schema(
   {
     title: {
@@ -9,11 +14,12 @@ const clinic = new Schema(
       trim: true,
       unique: true,
     },
-    clinic_type: {
+    clinicType: {
       type: [String],
     },
     location: {
-      type: [Object],
+      type: Schema.Types.ObjectId,
+      ref: McLocation.modelName,
     },
     address1: {
       type: String,
@@ -21,14 +27,14 @@ const clinic = new Schema(
       trim: true,
     },
     country: {
-      type: Object,
+      type: Schema.Types.ObjectId,
+      ref: Country.modelName,
       required: true,
-      default: null,
     },
     state: {
-      type: Object,
+      type: Schema.Types.ObjectId,
+      ref: State.modelName,
       required: true,
-      default: null,
     },
     city: {
       type: String,
@@ -45,10 +51,10 @@ const clinic = new Schema(
       required: true,
       trim: true,
     },
-    timezone: {
-      type: Object,
+    timeZone: {
+      type: Schema.Types.ObjectId,
+      ref: Timezone.modelName,
       required: true,
-      default: null,
     },
     startTime: {
       type: String,
@@ -60,10 +66,9 @@ const clinic = new Schema(
       required: true,
       trim: true,
     },
-    phonetypes: {
-      type: Array,
+    phoneNumber: {
+      type: [Object],
       required: true,
-      default: [],
     },
     active: {
       type: Boolean,

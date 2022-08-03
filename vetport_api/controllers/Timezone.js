@@ -4,9 +4,8 @@ const Timezone = require("../models/Timezone");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Timezone(body);
-    const doc = await Doc.save();
-    res.status(200).json(doc);
+    const doc = await Timezone.create(body);
+    res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -15,8 +14,8 @@ exports.create = async (req, res) => {
 // Retrieve all Timezone
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Timezone.find({}).lean();
-    res.json(docs);
+    const docs = await Timezone.find({}).lean();
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }
