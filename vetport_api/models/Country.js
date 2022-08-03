@@ -8,6 +8,12 @@ const country = new Schema(
       required: true,
       trim: true,
     },
+    code: {
+      type: String,
+      required: true,
+      trim: true,
+      uppercase: true,
+    },
   },
   { timestamps: true }
 );

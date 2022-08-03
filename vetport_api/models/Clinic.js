@@ -15,7 +15,22 @@ const clinic = new Schema(
       unique: true,
     },
     clinicType: {
-      type: [String],
+      brickAndMortar: {
+        type: Boolean,
+        default: false,
+      },
+      referral: {
+        type: Boolean,
+        default: false,
+      },
+      equine: {
+        type: Boolean,
+        default: false,
+      },
+      mobile: {
+        type: Boolean,
+        default: false,
+      },
     },
     location: {
       type: Schema.Types.ObjectId,
@@ -70,7 +85,7 @@ const clinic = new Schema(
       type: [Object],
       required: true,
     },
-    active: {
+    status: {
       type: Boolean,
       default: true,
     },
