@@ -30,9 +30,6 @@ exports.findByDate = async (req, res) => {
     fromDate.setHours(0, 0, 0, 0);
     toDate.setHours(23, 59, 59, 0);
 
-    console.log(toDate.toLocaleString());
-    console.log(fromDate.toLocaleString());
-
     const docs = await Appointment.find({
       startTime: { $gte: fromDate, $lte: toDate },
     }).lean();
