@@ -50,3 +50,14 @@ exports.findByName = async (req, res) => {
     res.status(500).json(error);
   }
 };
+
+// exports.findByStatus = async (req, res) => {
+//   try {
+//     let doc = await Vendor.find({
+//       status: { $eq: req.query.status },
+//     });
+//     res.status(200).json(doc);
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// };
