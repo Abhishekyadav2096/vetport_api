@@ -51,62 +51,62 @@ exports.verifyClientPnumber = async (req, res) => {
   }
 };
 
-// Retrieve all Client from the database.
-exports.getPatient = async (req, res) => {
-  console.log(req.params);
-  try {
-    const { _id } = req.params;
-    //const docs = await Clientregistration.aggregate(pipeline)
-    let pipeline = [
-      {
-        $match: {
-          _id: ObjectId(_id),
-        },
-      },
-      {
-        $lookup: {
-          from: "patientregistrations",
+// // Retrieve all Client from the database.
+// exports.getPatient = async (req, res) => {
+//   console.log(req.params);
+//   try {
+//     const { _id } = req.params;
+//     //const docs = await Clientregistration.aggregate(pipeline)
+//     let pipeline = [
+//       {
+//         $match: {
+//           _id: ObjectId(_id),
+//         },
+//       },
+//       {
+//         $lookup: {
+//           from: "patientregistrations",
 
-          as: "patient_info",
-          let: {
-            id: "$_id",
-          },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $eq: ["$client_Id", "$$id"],
-                },
-              },
-            },
-          ],
-        },
-      },
-      {
-        $unwind: "$patient_info",
-        //preserveNullAndEmptyArrays : true
-      },
-      {
-        $project: {
-          firstname: 1,
-          lastname: 1,
-          patient_info: 1,
-          result: {
-            $and: [
-              { $gt: ["$patient_info.age", 4] },
-              { $lt: ["$patient_info.age", 7] },
-            ],
-          },
-        },
-      },
-    ];
-    const docs = await Clientregistration.aggregate(pipeline);
-    console.log(docs);
-    res.json(docs);
-  } catch (error) {
-    console.log(error);
-  }
-};
+//           as: "patient_info",
+//           let: {
+//             id: "$_id",
+//           },
+//           pipeline: [
+//             {
+//               $match: {
+//                 $expr: {
+//                   $eq: ["$client_Id", "$$id"],
+//                 },
+//               },
+//             },
+//           ],
+//         },
+//       },
+//       {
+//         $unwind: "$patient_info",
+//         //preserveNullAndEmptyArrays : true
+//       },
+//       {
+//         $project: {
+//           firstname: 1,
+//           lastname: 1,
+//           patient_info: 1,
+//           result: {
+//             $and: [
+//               { $gt: ["$patient_info.age", 4] },
+//               { $lt: ["$patient_info.age", 7] },
+//             ],
+//           },
+//         },
+//       },
+//     ];
+//     const docs = await Clientregistration.aggregate(pipeline);
+//     console.log(docs);
+//     res.json(docs);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // Find a single Client with an id
 exports.findOne = async (req, res) => {

@@ -4,8 +4,7 @@ const Vendoritem = require("../models/Vendoritem");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Vendoritem(body);
-    const doc = await Doc.save();
+    const doc = await Vendoritem.create(body);
     res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -48,5 +47,16 @@ exports.findByName = async (req, res) => {
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
+  }
+};
+
+// Retrieve Vendoritem from the database by query
+exports.filterByQuery = async (req, res) => {
+  try {
+    const query = req.query;
+    const docs = await Vendoritem.find(query).lean();
+    res.status(200).json(docs);
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
