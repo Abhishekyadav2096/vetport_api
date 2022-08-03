@@ -53,12 +53,9 @@ router.use("/groupplanitem", require("./public/groupPlanItem"));
 router.use("/reminder", require("./public/Reminder"));
 router.use("/packageType", require("./public/Packagetype"));
 router.use("/contentType", require("./public/Contenttype"));
-<<<<<<< HEAD
 router.use("/categoryTax", require("./public/CategoryTax"));
 router.use("/subCategoryTax", require("./public/SubCategoryTax"));
-=======
 router.use("/equipmentcategory", require("./public/Equipmentcategory"));
 router.use("/equipment", require("./public/Equipment"));
->>>>>>> 618c1daf11316be410761b1e174863aa911fb39d
 
 module.exports = router;
