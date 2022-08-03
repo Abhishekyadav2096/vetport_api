@@ -5,6 +5,6 @@ const visitreason = require("../../../controllers/Visitreason");
 
 router.post("/save_visitReason", visitreason.create);
 router.get("/get_visitReason", visitreason.findAll);
-router.put("/update_visitReason", visitreason.update);
+router.put("/update_visitReason/:id", visitreason.update);
 
 module.exports = router;

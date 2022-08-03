@@ -56,10 +56,25 @@ exports.update = async (req, res) => {
 // Retrieve Clinic by type and status
 exports.findByTypeAndStatus = async (req, res) => {
   try {
-    let doc = await Clinic.find({
-      clinic_type: { $elemMatch: { $eq: req.query.type } },
-      status: { $eq: req.query.status },
-    });
+    const query = {};
+    query["status"] = req.params.status === "true";
+    query["clinicType.referral"] = req.params.referral === "true";
+    if (req.params.clinictype !== undefined) {
+      const clinicType = req.params.clinictype;
+      query[`clinicType.${clinicType}`] = true;
+    }
+    console.log(query);
+    const doc = await Clinic.find(query).lean();
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// Retrieve default clinic
+exports.getDefaultClinic = async (req, res) => {
+  try {
+    const doc = await Clinic.find({ default: true }).lean();
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -67,44 +82,28 @@ exports.findByTypeAndStatus = async (req, res) => {
 };
 
 //Retrieve Clinic by name
-
 exports.filterByClinicName = async (req, res) => {
   try {
-    docs = await Clinic.aggregate([
-      {
-        $project: {
-          title: "$title",
-        },
-      },
-    ]);
+    const docs = await Clinic.find({}, { title: 1 }).lean();
 
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
-  }
-};
-
-exports.getClinicByDefault = async (req, res) => {
-  try {
-    const doc = await Clinic.find({ default: true });
-    res.status(200).json(doc);
-  } catch (error) {
-    res.status(500).json(error);
   }
 };
 
 // filter refferal clinic
-exports.getRefferalClinic = async (req, res) => {
-  try {
-    const docs = await Clinic.find(
-      {
-        clinic_type: { $elemMatch: { $eq: "Refferal" } },
-      },
-      { title: 1 }
-    );
+// exports.getRefferalClinic = async (req, res) => {
+//   try {
+//     const docs = await Clinic.find(
+//       {
+//         clinic_type: { $elemMatch: { $eq: "Refferal" } },
+//       },
+//       { title: 1 }
+//     );
 
-    res.status(200).json(docs);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-};
+//     res.status(200).json(docs);
+//   } catch (error) {
+//     res.status(500).json(error.message);
+//   }
+// };
