@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const objectId = mongoose.Types.ObjectId;
+
 const Staff = require("../models/Staff");
 const User = require("../models/User");
 
@@ -122,11 +124,40 @@ exports.update = async (req, res) => {
 
 // filter provide by referral clinic
 
-exports.filterReferralProvider = async (req, res) => {
+// exports.filterReferralProvider = async (req, res) => {
+//   try {
+//     const clinicId = req.params.clinicId;
+//     const doc = await Staff.aggregate([
+//       { $match: { clinic: clinicId, isProvider: true } },
+//       {
+//         $project: {
+//           title: {
+//             $concat: ["$firstName", " ", "$lastName"],
+//           },
+//         },
+//       },
+//     ]);
+//     res.status(200).json(doc);
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// };
+
+// // filter provide by referral clinic
+
+exports.filterByClinic = async (req, res) => {
   try {
-    const clinicId = req.params.clinicId;
+    const query = {};
+
+    query["clinic"] = objectId(req.params.clinic);
+    query["status"] = req.params.status == "true";
+
+    if (req.params["isProvider"] !== undefined) {
+      query["isProvider"] = req.params.isProvider == "true";
+    }
+
     const doc = await Staff.aggregate([
-      { $match: { clinic: clinicId, isProvider: true } },
+      { $match: query },
       {
         $project: {
           title: {

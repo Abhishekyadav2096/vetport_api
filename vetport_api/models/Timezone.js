@@ -9,7 +9,7 @@ const timezone = new Schema(
       trim: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true, strict: false }
 );
 
 const TimezoneModel = mongoose.model("timezone", timezone);
