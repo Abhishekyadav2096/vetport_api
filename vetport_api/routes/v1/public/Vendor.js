@@ -7,6 +7,6 @@ router.post("/save_vendor", vendor.create);
 router.get("/get_vendor", vendor.findAll);
 router.put("/update_vendor/:id", vendor.update);
 router.get("/get_vendorByName/:name?", vendor.findByName);
-//router.get("/get_vendorByStatus", vendor.findByStatus);
+router.get("/get_vendorByStatus/:status", vendor.findByStatus);
 
 module.exports = router;

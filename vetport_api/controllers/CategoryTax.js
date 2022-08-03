@@ -1,33 +1,32 @@
-const Vendortype = require("../models/Vendortype");
+const CategoryTax = require("../models/CategoryTax");
 
-// Create and Save a Vendor type
+// Create and Save a new CategoryTax
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const doc = await Vendortype.create(body);
+    const doc = await CategoryTax.create(body);
     res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
 };
 
-// Retrieve all Vendor type from the database.
+// Retrieve all CategoryTax from the database.
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Vendortype.find({}).lean();
+    let docs = await CategoryTax.find({}).lean();
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }
 };
 
-// Update a Vendor type by the id in the request
-
+// Update a CategoryTax by the id in the request
 exports.update = async (req, res) => {
   try {
     const id = req.params.id;
     const body = req.body;
-    const doc = await Vendortype.findByIdAndUpdate(id, body, {
+    const doc = await CategoryTax.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
