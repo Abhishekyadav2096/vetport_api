@@ -1,4 +1,4 @@
-const Contenttype = require("../models/Packagetype");
+const Contenttype = require("../models/Contenttype");
 
 // Create and Save a Content type
 exports.create = async (req, res) => {

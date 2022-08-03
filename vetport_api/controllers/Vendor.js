@@ -4,8 +4,7 @@ const Vendor = require("../models/Vendor");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Vendor(body);
-    const doc = await Doc.save();
+    const doc = await Vendor.create(body);
     res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -15,7 +14,7 @@ exports.create = async (req, res) => {
 // Retrieve all Vendor  from the database.
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Vendor.find({});
+    let docs = await Vendor.find({}).lean();
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
@@ -32,6 +31,9 @@ exports.update = async (req, res) => {
       new: true,
       runValidators: true,
     });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -45,6 +47,18 @@ exports.findByName = async (req, res) => {
     const doc = await Vendor.find({
       title: { $regex: name, $options: "i" },
     }).lean();
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+exports.findByStatus = async (req, res) => {
+  try {
+    const status = req.params.status;
+    const doc = await Vendor.find({
+      status: { $eq: req.params.status },
+    });
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);

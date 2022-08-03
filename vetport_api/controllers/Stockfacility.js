@@ -4,8 +4,7 @@ const Stockfacility = require("../models/Stockfacility");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Stockfacility(body);
-    const doc = await Doc.save();
+    const doc = await Stockfacility.create(body);
     res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
@@ -32,6 +31,9 @@ exports.update = async (req, res) => {
       new: true,
       runValidators: true,
     });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);

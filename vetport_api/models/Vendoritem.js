@@ -10,6 +10,7 @@ const vendoritem = new Schema({
   vendor: {
     type: Schema.Types.ObjectId,
     ref: Vendor.modelName,
+    required: true,
   },
   title: {
     type: String,
@@ -19,6 +20,7 @@ const vendoritem = new Schema({
   manufacturer: {
     type: Schema.Types.ObjectId,
     ref: Manufacturer.modelName,
+    required: true,
   },
   packageType: {
     type: Schema.Types.ObjectId,

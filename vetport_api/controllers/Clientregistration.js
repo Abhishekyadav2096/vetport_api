@@ -51,7 +51,9 @@ exports.verifyClientPnumber = async (req, res) => {
   }
 };
 
+// // Retrieve all Client from the database.
 // Retrieve all Client from the database.
+
 // exports.getPatient = async (req, res) => {
 //   console.log(req.params);
 //   try {

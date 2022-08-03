@@ -14,6 +14,7 @@ const vendor = new Schema(
     vendorType: {
       type: Schema.Types.ObjectId,
       ref: Vendortype.modelName,
+      required: true,
     },
     phoneNumber: {
       type: [Object],
@@ -22,6 +23,7 @@ const vendor = new Schema(
     country: {
       type: Schema.Types.ObjectId,
       ref: Country.modelName,
+      required: true,
     },
     email: {
       type: String,
@@ -31,6 +33,7 @@ const vendor = new Schema(
     state: {
       type: Schema.Types.ObjectId,
       ref: State.modelName,
+      required: true,
     },
     city: {
       type: String,
