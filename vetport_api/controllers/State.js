@@ -14,7 +14,19 @@ exports.create = async (req, res) => {
 // Retrieve all State
 exports.findAll = async (req, res) => {
   try {
-    let docs = await State.find({}).lean();
+    const docs = await State.find({}).lean();
+    res.status(200).json(docs);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+// Retrieve by country
+exports.findByCountry = async (req, res) => {
+  try {
+    const countryId = req.params.countryId;
+    console.log(countryId);
+    const docs = await State.find({ country: countryId }).lean();
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);

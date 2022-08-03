@@ -52,6 +52,8 @@ router.use("/planitem", require("./public/Planitem"));
 router.use("/groupplanitem", require("./public/groupPlanItem"));
 router.use("/reminder", require("./public/Reminder"));
 router.use("/packageType", require("./public/Packagetype"));
-router.use("/contentType", require("./public/ContentType"));
+router.use("/contentType", require("./public/Contenttype"));
+router.use("/equipmentcategory", require("./public/Equipmentcategory"));
+router.use("/equipment", require("./public/Equipment"));
 
 module.exports = router;

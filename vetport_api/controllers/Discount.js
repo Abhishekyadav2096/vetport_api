@@ -4,9 +4,8 @@ const Discount = require("../models/Discount");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Discount(body);
-    const doc = await Doc.save();
-    res.status(200).json(doc);
+    const doc = await Discount.create(body);
+    res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -16,8 +15,8 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Discount.find({}).lean();
-    res.json(docs);
+    const docs = await Discount.find({}).lean();
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -34,7 +33,7 @@ exports.getDiscountByName = async (req, res) => {
         },
       },
     ]);
-    res.json(docs);
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }
@@ -44,10 +43,16 @@ exports.getDiscountByName = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { id } = req.query;
+    const id = req.params.id;
     const body = req.body;
-    let doc = await Discount.findByIdAndUpdate({ _id: id }, body);
-    res.status(200).json("updated");
+    const doc = await Discount.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
+    res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }

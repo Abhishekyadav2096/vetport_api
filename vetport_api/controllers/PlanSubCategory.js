@@ -21,10 +21,14 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// Retrieve Plan sub-category by query parameter
-exports.findByQuery = async (req, res) => {
+// Retrieve Plan sub-category by plan category and status
+exports.findByPlanCategory = async (req, res) => {
   try {
-    const query = req.query;
+    const query = {};
+    query["plancategory_id"] = req.params.planCategoryId;
+    if (req.params.status != undefined) {
+      query["status"] = req.params.status === "true";
+    }
     const docs = await PlanSubCategory.find(query).lean();
     res.status(200).json(docs);
   } catch (error) {

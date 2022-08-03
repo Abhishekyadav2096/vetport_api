@@ -15,7 +15,7 @@ const planSubCategory = new Schema(
       type: Schema.Types.ObjectId,
       ref: PlanCategory.modelName,
     },
-    plan_sub_category: {
+    title: {
       type: String,
       required: true,
       trim: true,

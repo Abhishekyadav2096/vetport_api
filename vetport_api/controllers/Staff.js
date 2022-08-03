@@ -155,7 +155,7 @@ exports.filterByClinic = async (req, res) => {
     if (req.params["isProvider"] !== undefined) {
       query["isProvider"] = req.params.isProvider == "true";
     }
-
+    console.log(query);
     const doc = await Staff.aggregate([
       { $match: query },
       {
