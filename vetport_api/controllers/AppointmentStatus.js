@@ -57,7 +57,7 @@ exports.delete = async (req, res) => {
     await AppointmentStatus.findByIdAndDeconste(id);
     res
       .status(200)
-      .json({ message: "AppointmentStatus deconsted successfully." });
+      .json({ message: "AppointmentStatus deleted successfully." });
   } catch (error) {
     res.status(500).json(error);
   }

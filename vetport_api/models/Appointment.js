@@ -1,13 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const Clinic = require("./Clinic");
 const Patient = require("./Patientregistration");
 const Appointmenttype = require("./Appointmenttype");
+const AppointmentStatus = require("./AppointmentStatus");
 const Staff = require("./Staff");
 const Visitreason = require("./Visitreason");
+const Equipment = require("./Equipment");
 
 const appointment = new Schema(
   {
+    clinic: {
+      type: Schema.Types.ObjectId,
+      ref: Clinic.modelName,
+    },
     patient: {
       type: Schema.Types.ObjectId,
       ref: Patient.modelName,
@@ -16,6 +23,10 @@ const appointment = new Schema(
     appointmentType: {
       type: Schema.Types.ObjectId,
       ref: Appointmenttype.modelName,
+    },
+    equipment: {
+      type: Schema.Types.ObjectId,
+      ref: Equipment.modelName,
     },
     reason: {
       type: Schema.Types.ObjectId,
@@ -34,14 +45,15 @@ const appointment = new Schema(
       type: Date,
       required: true,
     },
+    status: {
+      type: Schema.Types.ObjectId,
+      ref: AppointmentStatus.modelName,
+    },
     // comments: {
     //   type: String,
     //   trim: true,
     // },
-    // equipment: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: Equipment.modelName,
-    // },
+
     // dropOff: {
     //   type: Boolean,
     //   default: false,
