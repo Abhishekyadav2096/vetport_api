@@ -63,7 +63,6 @@ exports.findByTypeAndStatus = async (req, res) => {
       const clinicType = req.params.clinictype;
       query[`clinicType.${clinicType}`] = true;
     }
-    console.log(query);
     const doc = await Clinic.find(query).lean();
     res.status(200).json(doc);
   } catch (error) {
