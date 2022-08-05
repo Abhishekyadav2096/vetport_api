@@ -9,6 +9,6 @@ router.get(
   "/get_plansubcategory_byquery/:planCategoryId/:status?",
   planSubCategory.findByPlanCategory
 );
-router.put("/update_plansubcategory", planSubCategory.update);
+router.put("/update_plansubcategory/:id", planSubCategory.update);
 
 module.exports = router;

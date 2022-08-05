@@ -54,7 +54,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const id = req.query.id;
-    await AppointmentStatus.findByIdAndDeconste(id);
+    await AppointmentStatus.findByIdAndDelete(id);
     res
       .status(200)
       .json({ message: "AppointmentStatus deleted successfully." });

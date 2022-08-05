@@ -1,23 +1,23 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const stockbasket = new Schema(
+const paymentgroup = new Schema(
   {
     title: {
       type: String,
       required: true,
       trim: true,
+      unique: true,
     },
     status: {
       type: Boolean,
-      default: true,
     },
   },
   {
     timestamps: true,
-    statics: false,
+    strict: false,
   }
 );
 
-const StockbasketModel = mongoose.model("stockbasket", stockbasket);
-module.exports = StockbasketModel;
+const PaymentGroupModel = mongoose.model("paymentgroup", paymentgroup);
+module.exports = PaymentGroupModel;

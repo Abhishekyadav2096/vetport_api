@@ -10,7 +10,7 @@ router.patch(
   "/update_default_appointmenttype",
   appointmenttype.updateDefaultAppointmentType
 );
-router.put("/update_appointmenttype", appointmenttype.update);
+router.put("/update_appointmenttype/:id", appointmenttype.update);
 router.delete("/delete_appointmenttype", appointmenttype.delete);
 router.get("/get_appointmenttype_by_type", appointmenttype.filterByType);
 

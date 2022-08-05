@@ -36,8 +36,10 @@ exports.findByQuery = async (req, res) => {
 // Update default Appointmenttype from the database by id.
 exports.updateDefaultAppointmentType = async (req, res) => {
   try {
-    const { id } = req.query;
+    const id = req.query.id;
     const defaultType = req.body;
+    console.log(id);
+    console.log(defaultType);
     let doc = await Appointmenttype.findByIdAndUpdate(id, defaultType).lean();
     res.status(200).json(doc);
   } catch (error) {
@@ -48,10 +50,16 @@ exports.updateDefaultAppointmentType = async (req, res) => {
 // Update a Appointmenttype  by the id in the request
 exports.update = async (req, res) => {
   try {
-    const { id } = req.query;
+    const id = req.params.id;
     const body = req.body;
-    let doc = await Appointmenttype.findByIdAndUpdate({ _id: id }, body);
-    res.status(200).json("doc");
+    const doc = await Appointmenttype.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
+    res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }

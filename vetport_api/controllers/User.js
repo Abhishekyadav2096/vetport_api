@@ -25,10 +25,16 @@ exports.findAll = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { id } = req.query;
+    const id = req.params.id;
     const body = req.body;
-    let doc = await User.findByIdAndUpdate({ _id: id }, body);
-    res.json("updated");
+    const doc = await User.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
+    res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }

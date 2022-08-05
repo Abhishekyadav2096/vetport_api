@@ -37,11 +37,17 @@ exports.findAll = async (req, res) => {
 // Update Plan sub-category by query parameter
 exports.update = async (req, res) => {
   try {
-    const id = req.query.id;
+    const id = req.params.id;
     const body = req.body;
-    const doc = await Plancategory.findByIdAndUpdate(id, body).lean();
+    const doc = await Plancategory.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json(error);
   }
 };

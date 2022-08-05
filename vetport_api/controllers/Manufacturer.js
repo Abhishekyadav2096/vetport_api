@@ -32,6 +32,22 @@ exports.update = async (req, res) => {
       new: true,
       runValidators: true,
     });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// Retrieve Manufacturer from the database by name.
+exports.findByName = async (req, res) => {
+  try {
+    const name = req.params.name === undefined ? "" : req.params.name;
+    const doc = await Manufacturer.find({
+      title: { $regex: name, $options: "i" },
+    }).lean();
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
