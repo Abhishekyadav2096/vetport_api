@@ -21,19 +21,20 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// Retrieve Appointments by day/month/week
+// Retrieve Appointments by day/month/week and clinic
 // pass fromdate and todate in route params
 // Add clinic id to route params
 exports.findByDate = async (req, res) => {
   try {
     const fromDate = new Date(req.params.from);
     const toDate = new Date(req.params.to);
-    // const clinic = req.params.clinicId;
+    const clinic = req.params.clinic;
 
     fromDate.setHours(0, 0, 0, 0);
     toDate.setHours(23, 59, 59, 0);
 
     const docs = await Appointment.find({
+      clinic: clinic,
       startTime: { $gte: fromDate, $lte: toDate },
     }).lean();
     res.status(200).json(docs);
@@ -49,8 +50,9 @@ exports.findByStaff = async (req, res) => {
   try {
     const fromDate = new Date(req.params.date);
     const toDate = new Date(req.params.date);
-    // const clinic = req.params.clinicId;
+    const clinic = req.params.clinic;
 
+    // if (req.query.staff)
     const staff =
       req.params.staff !== undefined ? { staff: req.params.staff } : {};
 
@@ -59,6 +61,7 @@ exports.findByStaff = async (req, res) => {
 
     const docs = await Appointment.find({
       ...staff,
+      clinic: clinic,
       startTime: { $gte: fromDate, $lte: toDate },
     }).lean();
     res.status(200).json(docs);

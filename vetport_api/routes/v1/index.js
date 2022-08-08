@@ -61,4 +61,9 @@ router.use("/paymentGroup", require("./public/PaymentGroup")),
   router.use("/paymentType", require("./public/PaymentType"));
 router.use("/attachType", require("./public/AttachmentType"));
 
+router.use("/giftcard", require("./public/Giftcard"));
+router.use("/searchclientpatient", require("./public/Searchclientpatient"));
+router.use("/paymentGroup", require("./public/PaymentGroup"));
+router.use("/paymentType", require("./public/PaymentType"));
+
 module.exports = router;
