@@ -19,7 +19,6 @@ router.use("/species", require("./public/Species"));
 router.use("/breed", require("./public/Breed"));
 router.use("/sex", require("./public/Sex"));
 router.use("/color", require("./public/Color"));
-router.use("/mapcolor", require("./public/Mapcolor"));
 router.use("/referredby", require("./public/Reference"));
 router.use("/visitreason", require("./public/Visitreason"));
 router.use("/reservationtype", require("./public/Reservationtype"));
