@@ -11,6 +11,7 @@ const staffdesignation = new Schema(
   },
   {
     timestamps: true,
+    strict: false,
   }
 );
 

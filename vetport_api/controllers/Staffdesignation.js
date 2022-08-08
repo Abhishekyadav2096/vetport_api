@@ -4,9 +4,9 @@ const Staffdesignation = require("../models/Staffdesignation");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Staffdesignation(body);
-    const doc = await Doc.save();
-    res.status(200).json(doc);
+    const doc = await Staffdesignation.create(body);
+
+    res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -15,8 +15,8 @@ exports.create = async (req, res) => {
 // Retrieve all Staffdesignation
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Staffdesignation.find({}).lean();
-    res.json(docs);
+    const docs = await Staffdesignation.find({}).lean();
+    res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
   }

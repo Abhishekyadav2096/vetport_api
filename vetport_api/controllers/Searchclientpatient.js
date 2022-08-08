@@ -10,7 +10,15 @@ exports.findByQuery = async (req, res) => {
     let patientFilter = {};
     let clientFilter = {};
 
-    // const clinic = req.query.clinic;
+    const patientClinic =
+      req.query.clinic !== undefined
+        ? { "client.clinic": objectId(req.query.clinic) }
+        : {};
+
+    const clientClinic =
+      req.query.clinic !== undefined
+        ? { clinic: objectId(req.query.clinic) }
+        : {};
 
     let startTimer = new Date().getTime();
 
@@ -65,7 +73,7 @@ exports.findByQuery = async (req, res) => {
       },
       { $unwind: "$client" },
       {
-        $match: patientFilter,
+        $match: { $and: [patientFilter, patientClinic] },
       },
       {
         $project: {
@@ -91,7 +99,7 @@ exports.findByQuery = async (req, res) => {
     // filtering documents from client collection which match the query
     const clientDoc = await Clientregistration.aggregate([
       {
-        $match: clientFilter,
+        $match: { $and: [clientFilter, clientClinic] },
       },
       {
         $project: {
@@ -102,7 +110,7 @@ exports.findByQuery = async (req, res) => {
             lastname: "$lastName",
             email: "$email",
             phone: "$phonetypes.pnumber",
-            address1: {
+            address: {
               $concat: ["$address1", ", ", "$address2"],
             },
             clinic: "$clinicName",

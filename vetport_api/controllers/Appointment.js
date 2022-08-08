@@ -51,10 +51,15 @@ exports.findByStaff = async (req, res) => {
     const fromDate = new Date(req.params.date);
     const toDate = new Date(req.params.date);
     const clinic = req.params.clinic;
+    let staff = [];
 
-    // if (req.query.staff)
-    const staff =
-      req.params.staff !== undefined ? { staff: req.params.staff } : {};
+    if (req.query.staff !== undefined) {
+      staff = { staff: { $in: req.query.staff.split(",") } };
+      console.log(staff);
+    } else {
+      staff = {};
+      console.log(staff);
+    }
 
     fromDate.setHours(0, 0, 0, 0);
     toDate.setHours(23, 59, 59, 0);

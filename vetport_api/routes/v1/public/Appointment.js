@@ -6,10 +6,7 @@ const appointment = require("../../../controllers/Appointment");
 router.post("/save_appointment", appointment.create);
 router.get("/get_appointment", appointment.findAll);
 router.get("/get_appointmentByDate/:clinic/:from/:to", appointment.findByDate);
-router.get(
-  "/get_appointmentByStaff/:clinic/:date/:staff?",
-  appointment.findByStaff
-);
+router.get("/get_appointmentByStaff/:clinic/:date", appointment.findByStaff);
 router.put("/update_appointment/:id", appointment.update);
 
 // router.get("/get_appointmentByWeek/:from/:to", appointment.findByWeek);
