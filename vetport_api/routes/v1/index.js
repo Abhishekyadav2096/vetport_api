@@ -59,5 +59,6 @@ router.use("/equipmentcategory", require("./public/Equipmentcategory"));
 router.use("/equipment", require("./public/Equipment"));
 router.use("/paymentGroup", require("./public/PaymentGroup")),
   router.use("/paymentType", require("./public/PaymentType"));
+router.use("/attachType", require("./public/AttachmentType"));
 
 module.exports = router;
