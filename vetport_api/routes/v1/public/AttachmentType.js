@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const attachtype = require("../../../controllers/Species");
+const attachtype = require("../../../controllers/AttachmentType");
 
 router.post("/save_attachType", attachtype.create);
 router.get("/get_attachType", attachtype.findAll);

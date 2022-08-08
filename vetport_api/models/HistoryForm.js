@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
+const Species = require("./Species");
 const Schema = mongoose.Schema;
 
-const staffshift = new Schema(
+const historyform = new Schema(
   {
-    shiftname: {
-      type: String,
-      required: true,
-      trim: true,
+    speciesId: {
+      type: Schema.Types.ObjectId,
+      ref: Species.modelName,
     },
-    shifttime: {
+    name: {
       type: String,
       required: true,
       trim: true,
@@ -24,5 +24,5 @@ const staffshift = new Schema(
   }
 );
 
-const StaffshiftModel = mongoose.model("staffshift", staffshift);
-module.exports = StaffshiftModel;
+const HistoryFormModel = mongoose.model("historyform", historyform);
+module.exports = HistoryFormModel;
