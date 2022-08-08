@@ -57,5 +57,9 @@ router.use("/categoryTax", require("./public/CategoryTax"));
 router.use("/subCategoryTax", require("./public/SubCategoryTax"));
 router.use("/equipmentcategory", require("./public/Equipmentcategory"));
 router.use("/equipment", require("./public/Equipment"));
+router.use("/giftcard", require("./public/Giftcard"));
+router.use("/searchclientpatient", require("./public/Searchclientpatient"));
+router.use("/paymentGroup", require("./public/PaymentGroup"));
+router.use("/paymentType", require("./public/PaymentType"));
 
 module.exports = router;

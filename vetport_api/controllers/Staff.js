@@ -20,7 +20,7 @@ exports.create = async (req, res) => {
   }
 };
 
-// Retrieve all Staff from the database.
+// Retrieve all Staff from the database or by id.
 exports.find = async (req, res) => {
   try {
     const query = req.params.id === undefined ? {} : req.params;
@@ -78,7 +78,7 @@ exports.find = async (req, res) => {
 //   }
 // };
 
-// filter provider by name
+// filter by provider
 
 exports.filterProviderByName = async (req, res) => {
   try {
@@ -143,7 +143,7 @@ exports.update = async (req, res) => {
 //   }
 // };
 
-// // filter provide by referral clinic
+// // filter by clinic, status and isProvider
 
 exports.filterByClinic = async (req, res) => {
   try {

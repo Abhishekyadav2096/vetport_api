@@ -4,9 +4,8 @@ const Planitem = require("../models/Planitem");
 exports.create = async (req, res) => {
   try {
     const body = req.body;
-    const Doc = new Planitem(body);
-    const doc = await Doc.save();
-    res.status(200).json(doc);
+    const doc = await Planitem.create(body);
+    res.status(201).json(doc);
   } catch (error) {
     res.status(500).json(error);
   }
@@ -15,7 +14,7 @@ exports.create = async (req, res) => {
 // Retrieve all Planitem
 exports.findAll = async (req, res) => {
   try {
-    let docs = await Planitem.find({}).lean();
+    const docs = await Planitem.find({}).lean();
     res.status(200).json(docs);
   } catch (error) {
     res.status(500).json(error.message);
@@ -37,12 +36,18 @@ exports.findOne = async (req, res) => {
 // Update Planitem by query parameter
 exports.update = async (req, res) => {
   try {
-    const id = req.query.id;
+    const id = req.params.id;
     const body = req.body;
-    const doc = await Planitem.findByIdAndUpdate(id, body).lean();
+    const doc = await Planitem.findByIdAndUpdate(id, body, {
+      new: true,
+      runValidators: true,
+    });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).json(error);
   }
 };
 

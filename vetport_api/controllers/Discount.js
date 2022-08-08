@@ -24,20 +24,20 @@ exports.findAll = async (req, res) => {
 
 // filter discount by title
 
-exports.getDiscountByName = async (req, res) => {
-  try {
-    docs = await Discount.aggregate([
-      {
-        $project: {
-          title: "$title",
-        },
-      },
-    ]);
-    res.status(200).json(docs);
-  } catch (error) {
-    res.status(500).json(error.message);
-  }
-};
+// exports.getDiscountByName = async (req, res) => {
+//   try {
+//     docs = await Discount.aggregate([
+//       {
+//         $project: {
+//           title: "$title",
+//         },
+//       },
+//     ]);
+//     res.status(200).json(docs);
+//   } catch (error) {
+//     res.status(500).json(error.message);
+//   }
+// };
 
 // Update a Discount by the id in the request
 
@@ -52,6 +52,19 @@ exports.update = async (req, res) => {
     if (doc.length === 0) {
       return res.status(404).json({ message: "Invalid Id" });
     }
+    res.status(200).json(doc);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
+// filter discount by title
+exports.findByName = async (req, res) => {
+  try {
+    const name = req.params.name === undefined ? "" : req.params.name;
+    const doc = await Discount.find({
+      title: { $regex: name, $options: "i" },
+    }).lean();
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);

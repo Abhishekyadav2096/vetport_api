@@ -32,6 +32,9 @@ exports.update = async (req, res) => {
       new: true,
       runValidators: true,
     });
+    if (doc.length === 0) {
+      return res.status(404).json({ message: "Invalid Id" });
+    }
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);

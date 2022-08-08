@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const giftcard = require("../../../Giftcard");
+const giftcard = require("../../../controllers/Giftcard");
 
 router.post("/save_giftcard", giftcard.create);
 router.get("/get_giftcard", giftcard.find);
