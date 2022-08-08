@@ -3,12 +3,17 @@ const Schema = mongoose.Schema;
 
 const staffshift = new Schema(
   {
-    shiftname: {
+    shiftName: {
       type: String,
       required: true,
       trim: true,
     },
-    shifttime: {
+    startTime: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    endTime: {
       type: String,
       required: true,
       trim: true,
