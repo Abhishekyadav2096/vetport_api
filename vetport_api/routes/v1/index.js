@@ -61,5 +61,6 @@ router.use("/giftcard", require("./public/Giftcard"));
 router.use("/searchclientpatient", require("./public/Searchclientpatient"));
 router.use("/paymentGroup", require("./public/PaymentGroup"));
 router.use("/paymentType", require("./public/PaymentType"));
+router.use("/examform", require("./public/Examform"));
 
 module.exports = router;
