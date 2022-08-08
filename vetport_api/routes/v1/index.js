@@ -19,7 +19,6 @@ router.use("/species", require("./public/Species"));
 router.use("/breed", require("./public/Breed"));
 router.use("/sex", require("./public/Sex"));
 router.use("/color", require("./public/Color"));
-router.use("/mapcolor", require("./public/Mapcolor"));
 router.use("/referredby", require("./public/Reference"));
 router.use("/visitreason", require("./public/Visitreason"));
 router.use("/reservationtype", require("./public/Reservationtype"));
@@ -60,14 +59,11 @@ router.use("/equipment", require("./public/Equipment"));
 router.use("/paymentGroup", require("./public/PaymentGroup")),
   router.use("/paymentType", require("./public/PaymentType"));
 router.use("/attachType", require("./public/AttachmentType"));
-
 router.use("/giftcard", require("./public/Giftcard"));
 router.use("/searchclientpatient", require("./public/Searchclientpatient"));
 router.use("/paymentGroup", require("./public/PaymentGroup"));
 router.use("/paymentType", require("./public/PaymentType"));
-
 router.use("/historyform", require("./public/HistoryForm"));
-
 router.use("/examform", require("./public/Examform"));
 
 module.exports = router;
