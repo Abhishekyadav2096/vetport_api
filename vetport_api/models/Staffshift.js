@@ -1,18 +1,33 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const staffshift = new Schema ({
-    Shiftname : {
-        type : String
+const staffshift = new Schema(
+  {
+    shiftName: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    Shifttime : {
-        type : String
+    startTime: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    Status : {
-        type : Boolean
-    }
-})
+    endTime: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    status: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  {
+    timestamps: true,
+    strict: false,
+  }
+);
 
-
-const StaffshiftModel = mongoose.model("staffshift",staffshift)
-module.exports = StaffshiftModel
+const StaffshiftModel = mongoose.model("staffshift", staffshift);
+module.exports = StaffshiftModel;
