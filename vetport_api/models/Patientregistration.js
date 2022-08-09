@@ -47,5 +47,37 @@ const patientregistration = new Schema(
   }
 );
 
+// patientregistration.pre("save", async function (next) {
+//   await this.populate("clientId");
+//   const client = this.clientId;
+
+//   this.patientInfo = [
+//     ...client.firstName.split(" "),
+//     ...client.lastName.split(" "),
+//     ...client.address1.split(" "),
+//     ...client.address2.split(" "),
+//     client.email,
+//     client.phoneNumber[0].pnumber,
+//     ...this.patientName.split(" "),
+//   ].join(" ");
+//   next();
+// });
+
+// patientregistration.post("findOneAndUpdate", async function (doc, next) {
+//   await doc.populate("clientId");
+//   const client = doc.clientId;
+//   await doc.updateOne({
+//     patientInfo: `${[
+//       ...client.firstName.split(" "),
+//       ...client.lastName.split(" "),
+//       ...client.address1.split(" "),
+//       ...client.address2.split(" "),
+//       client.email,
+//       client.phoneNumber[0].pnumber,
+//       ...doc.patientName.split(" "),
+//     ].join(" ")}`,
+//   });
+// });
+
 const PatientModel = mongoose.model("patientregistration", patientregistration);
 module.exports = PatientModel;
