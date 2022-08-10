@@ -1,6 +1,11 @@
+const EventEmitter = require("events");
+const eventEmitter = new EventEmitter();
+
 const Clientregistration = require("../models/Clientregistration");
 const Patientregistration = require("../models/Patientregistration");
-const ObjectId = require("mongoose").Types.ObjectId;
+const clientEmitter = require("../events/Clientemitter");
+
+eventEmitter.on("updatePatientInfo", clientEmitter.updatePatientInfo);
 
 // Create and Save a new Client
 exports.create = async (req, res) => {
@@ -127,15 +132,24 @@ exports.findOne = async (req, res) => {
 // Update a Client by the id in the request
 exports.update = async (req, res) => {
   try {
+    let startTimer = new Date().getTime();
+
     const id = req.params.id;
     const body = req.body;
     const doc = await Clientregistration.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
+
     if (doc.length === 0) {
       return res.status(404).json({ message: "Invalid Id" });
     }
+
+    eventEmitter.emit("updatePatientInfo", Patientregistration, doc);
+
+    let endTimer = new Date().getTime();
+    let time = (endTimer - startTimer) / 1000;
+    console.log(time);
     res.status(200).json(doc);
   } catch (error) {
     res.status(500).json(error);
